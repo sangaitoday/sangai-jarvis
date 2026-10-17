@@ -95,7 +95,7 @@ test('static server serves index, legal pages, trailing slashes, HEAD, Range 206
   }
 });
 
-test('README and LICENSE include setup instructions, SangAI info, and contact email without hardcoded site URLs', () => {
+test('README and LICENSE include setup instructions, SangAI info, contact email, and the live demo link', () => {
   const readme = fs.readFileSync(path.resolve(__dirname, '../README.md'), 'utf8');
   const license = fs.readFileSync(path.resolve(__dirname, '../LICENSE'), 'utf8');
   const pkg = JSON.parse(fs.readFileSync(path.resolve(__dirname, '../package.json'), 'utf8'));
@@ -107,13 +107,13 @@ test('README and LICENSE include setup instructions, SangAI info, and contact em
   assert.match(readme, /WebGPU/);
   assert.match(readme, /sang@sangai\.today/);
   assert.match(readme, /SangAI/);
+  assert.match(readme, /\[Open the live SangAI Javis demo\]\(https:\/\/www\.sangai\.today\/\)/);
 
   assert.match(license, /sang@sangai\.today/);
   assert.match(license, /SangAI/);
 
-  // Ensure no hardcoded URLs to the sangai.today site exist in readme, package.json, or HTML
+  // Keep production site URLs out of app assets; the README intentionally links to the live demo.
   const siteUrlRe = /https?:\/\/(?:www\.)?sangai\.today/i;
-  assert.doesNotMatch(readme, siteUrlRe);
   assert.doesNotMatch(JSON.stringify(pkg), siteUrlRe);
   assert.doesNotMatch(read('index.html'), siteUrlRe);
   assert.doesNotMatch(read('privacy.html'), siteUrlRe);
