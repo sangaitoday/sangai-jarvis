@@ -13,9 +13,9 @@ KOKORO_JS_VERSION=1.2.1
 for tool in npm node curl sha256sum; do
   command -v "$tool" >/dev/null 2>&1 || { printf 'Required tool missing: %s\n' "$tool" >&2; exit 1; }
 done
-: "${SANGAI_TMP:=$ROOT/tmp}"
-mkdir -p "$SANGAI_TMP"
-BUILD_TMP="$(mktemp -d -p "$SANGAI_TMP" build-talk-tts.XXXXXX)"
+: "${TMPDIR:=$ROOT/tmp}"
+mkdir -p "$TMPDIR"
+BUILD_TMP="$(mktemp -d -p "$TMPDIR" build-talk-tts.XXXXXX)"
 trap 'rm -rf "$BUILD_TMP"' EXIT
 
 npm install --prefix "$BUILD_TMP" --no-save --package-lock=false "onnxruntime-web@$ORT_VERSION" esbuild@0.25.5

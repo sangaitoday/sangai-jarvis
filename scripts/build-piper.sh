@@ -8,9 +8,9 @@ PIPER_VOICES_REVISION=840e38a7e26d813bd6221b78cfbaefa3585b3f71
 HF_PINNED="https://huggingface.co/diffusionstudio/piper-voices/resolve/$PIPER_VOICES_REVISION"
 # Served from this origin so the default voices work without Hugging Face; every other voice loads from it.
 LOCAL_VOICES=(en_US-lessac-medium vi_VN-vais1000-medium)
-: "${SANGAI_TMP:=$ROOT/tmp}"
-mkdir -p "$SANGAI_TMP"
-BUILD_TMP="$(mktemp -d -p "$SANGAI_TMP" build-talk-onnx.XXXXXX)"
+: "${TMPDIR:=$ROOT/tmp}"
+mkdir -p "$TMPDIR"
+BUILD_TMP="$(mktemp -d -p "$TMPDIR" build-talk-onnx.XXXXXX)"
 trap 'rm -rf "$BUILD_TMP"' EXIT
 
 npm install --prefix "$BUILD_TMP" --no-save --package-lock=false \

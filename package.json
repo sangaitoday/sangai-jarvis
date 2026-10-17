@@ -1,8 +1,14 @@
 {
   "name": "sangai-javis",
   "version": "0.1.0",
-  "private": true,
-  "description": "Browser-only model and voice chat",
+  "description": "Browser-only on-device voice and model assistant",
+  "author": "Sang <sang@sangai.today>",
+  "homepage": "https://www.sangai.today",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sangaitoday/sangai-javis.git"
+  },
   "scripts": {
     "test": "node --test test/*.test.js",
     "assets": "bash scripts/build-webllm.sh && bash scripts/build-piper.sh && bash scripts/build-tts.sh",

@@ -111,3 +111,14 @@ test('README and LICENSE include setup instructions, SangAI info, and contact em
   assert.match(license, /sang@sangai\.today/);
   assert.match(license, /SangAI/);
 });
+
+test('no .env, secrets, or internal infra variables exist in the repository', () => {
+  const repoRoot = path.resolve(__dirname, '..');
+  const files = ['server.js', 'package.json', 'site-rules.js', 'scripts/build-piper.sh', 'scripts/build-tts.sh', 'scripts/build-webllm.sh'];
+  for (const file of files) {
+    const content = fs.readFileSync(path.join(repoRoot, file), 'utf8');
+    assert.doesNotMatch(content, /SANGAI_TMP|SANGAI_SITE|elsanow|trantansang|sangcorp/i, file);
+  }
+  assert.equal(fs.existsSync(path.join(repoRoot, '.env')), false);
+  assert.equal(fs.existsSync(path.join(repoRoot, '.env.local')), false);
+});

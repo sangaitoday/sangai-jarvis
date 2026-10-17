@@ -5,9 +5,9 @@ IFS=$'\n\t'
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd -P)"
 for tool in npm node; do
   command -v "$tool" >/dev/null 2>&1 || { printf 'Required tool missing: %s\n' "$tool" >&2; exit 1; }
-done
-mkdir -p "${SANGAI_TMP:-$ROOT/tmp}"
-BUILD_TMP="$(mktemp -d "${SANGAI_TMP:-$ROOT/tmp}/talk-models-build.XXXXXX")"
+: "${TMPDIR:=$ROOT/tmp}"
+mkdir -p "$TMPDIR"
+BUILD_TMP="$(mktemp -d -p "$TMPDIR" talk-models-build.XXXXXX)"
 trap 'rm -rf "$BUILD_TMP"' EXIT
 
 WEBLLM_VERSION=0.2.85

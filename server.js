@@ -86,8 +86,8 @@ function createSite() {
 }
 
 if (require.main === module) {
-  const port = Number(process.env.PORT || process.env.SANGAI_SITE_PORT || 8080);
-  const host = process.env.HOST || process.env.SANGAI_SITE_HOST || '127.0.0.1';
+  const port = Number(process.env.PORT || 8080);
+  const host = process.env.HOST || '127.0.0.1';
   const site = createSite();
   const server = http.createServer(site.handle);
   server.listen(port, host, () => {
