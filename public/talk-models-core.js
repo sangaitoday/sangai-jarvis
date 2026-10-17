@@ -73,8 +73,6 @@
   // Llama-3.1-Nemotron, DeepSeek-R1-Distill-Qwen), so the publisher is matched before the base family. TinyLlama is a community model, not Meta's.
   const MODEL_ICONS = [
     [/^auto$/i, '/vendor/model-icons/auto.svg'],
-    [/^sangai$/i, '/sangai-logo.jpg'],
-    [/^built-?in$/i, '/vendor/model-icons/gemini.svg'],
     [/nemotron|nvidia/i, '/vendor/model-icons/nvidia.svg'],
     [/hermes/i, '/vendor/model-icons/nousresearch.svg'],
     [/deepseek/i, '/vendor/model-icons/deepseek.svg'],

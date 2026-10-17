@@ -67,8 +67,9 @@
         }
       }
     } else if (row.engine === 'supertonic3') {
-      await cachesImpl.delete(CACHES.supertonic3);
+      await cachesImpl?.delete(CACHES.supertonic3);
     } else if (row.engine === 'kokoro') {
+      if (!cachesImpl) return;
       const urls = (await cachedUrls(cachesImpl, CACHES.transformers)).filter((url) => url.includes(`/${KOKORO_REPO}/`));
       const cache = urls.length ? await cachesImpl.open(CACHES.transformers) : null;
       for (const url of urls) await cache.delete(url);

@@ -120,20 +120,10 @@
   };
   const LISTENING_RMS = 0.03;
   const SPEAKING_RMS = 0.02;
-  const ORB_HOLD_MS = 600;
-  const THINK_MAX_MS = 8000;
 
   const parseMode = (raw) => (MODES.includes(raw) ? raw : 'space');
 
   const modeHint = (mode) => MODE_HINTS[parseMode(mode)];
-
-  function orbState({ inCall, connecting, now, micLoudAt, remoteLoudAt }) {
-    if (!inCall) return connecting ? 'thinking' : 'ready';
-    if (now - remoteLoudAt < ORB_HOLD_MS) return 'speaking';
-    if (now - micLoudAt < ORB_HOLD_MS) return 'listening';
-    if (micLoudAt > remoteLoudAt && now - micLoudAt < THINK_MAX_MS) return 'thinking';
-    return 'listening';
-  }
 
   const VIETNAMESE_ONLY = /[đĐ]|[\u0306\u031B\u0309\u0323]|[aeiouyAEIOUY]\u0303|[aeoAEO]\u0302[\u0300\u0301\u0303\u0309\u0323]/g;
   const ACCENT_MARKS = /[\u0300\u0301\u0302\u0303]/g;
@@ -166,7 +156,7 @@
 
   const voiceIdFor = (prefs, lang, fallback) => (prefs && prefs[baseLang(lang)]) || fallback;
 
-  const api = { detectLang, speechLangs, rememberVoice, voiceIdFor, filterBrowserVoices, previewSpeechText, chooseBrowserVoice, hasSupportedBrowserVoice, canUseBrowserDuringOnnxPreparation, speechText, speechChunks, displayText, MODES, parseMode, modeHint, orbState, LISTENING_RMS, SPEAKING_RMS };
+  const api = { detectLang, speechLangs, rememberVoice, voiceIdFor, filterBrowserVoices, previewSpeechText, chooseBrowserVoice, hasSupportedBrowserVoice, canUseBrowserDuringOnnxPreparation, speechText, speechChunks, displayText, MODES, parseMode, modeHint, LISTENING_RMS, SPEAKING_RMS };
   if (typeof window !== 'undefined') window.TalkVoiceCore = api;
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
 })();

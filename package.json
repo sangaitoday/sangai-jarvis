@@ -6,6 +6,7 @@
   "scripts": {
     "test": "node --test test/*.test.js",
     "assets": "bash scripts/build-webllm.sh && bash scripts/build-piper.sh && bash scripts/build-tts.sh",
+    "prestart": "test -d public/webllm && test -d public/onnx || npm run assets",
     "start": "node server.js",
     "dev": "node server.js"
   }

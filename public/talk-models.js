@@ -105,6 +105,7 @@
   }
 
   async function cachedUrls() {
+    if (typeof caches === 'undefined') return new Set();
     return new Set((await (await caches.open(MODEL_CACHE)).keys()).map((request) => request.url));
   }
 
@@ -115,6 +116,10 @@
   }
 
   async function downloads() {
+    const estimate = navigator.storage?.estimate ? await navigator.storage.estimate() : {};
+    if (typeof caches === 'undefined') {
+      return { models: [], usage: estimate.usage ?? null, quota: estimate.quota ?? null };
+    }
     const keys = await cachedUrls();
     const cache = await caches.open(MODEL_CACHE);
     const seen = new Set();
@@ -122,6 +127,7 @@
     for (const model of catalog.models) {
       if (seen.has(model.url)) continue;
       seen.add(model.url);
+      if (!keys.has(model.url + 'tensor-cache.json')) continue;
       const stored = await cache.match(model.url + 'tensor-cache.json');
       if (!stored) continue;
       const { present, records } = await storedShards(model, keys, await stored.json());
@@ -134,7 +140,6 @@
         complete: present.length === records.length,
       });
     }
-    const estimate = navigator.storage?.estimate ? await navigator.storage.estimate() : {};
     return { models, usage: estimate.usage ?? null, quota: estimate.quota ?? null };
   }
 
@@ -143,6 +148,7 @@
     if (!model) throw new Error(`Unknown browser model: ${id}`);
     const current = catalog.models.find((record) => record.id === selectedId);
     if (current && current.url === model.url) await unload();
+    if (typeof caches === 'undefined') return;
     for (const name of [MODEL_CACHE, 'webllm/config']) {
       const cache = await caches.open(name);
       for (const request of await cache.keys()) {

@@ -480,22 +480,24 @@
 
   function createVideo(stage) {
     const video = el('video', 'home-graph-bg home-graph-bg--video');
-    video.src = VIDEO_SRC;
+    video.preload = 'none';
     video.muted = true;
     video.loop = true;
-    video.autoplay = true;
     video.playsInline = true;
+    video.setAttribute('preload', 'none');
     video.setAttribute('muted', '');
     video.setAttribute('loop', '');
-    video.setAttribute('autoplay', '');
     video.setAttribute('playsinline', '');
     video.setAttribute('aria-hidden', 'true');
+    video.hidden = true;
     prepend(stage, video);
-    if (typeof video.play === 'function') {
-      Promise.resolve(video.play()).catch(() => {});
-    }
     return {
       show() {
+        if (!video.getAttribute('src')) {
+          video.src = VIDEO_SRC;
+          video.preload = 'auto';
+          video.setAttribute('preload', 'auto');
+        }
         video.hidden = false;
         if (typeof video.play === 'function') Promise.resolve(video.play()).catch(() => {});
       },

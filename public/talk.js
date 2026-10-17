@@ -1599,10 +1599,11 @@
     if (!said || inFlight) return;
     stopRec();
     const mine = ++flight;
-    messages.push({ role: 'user', content: said });
+    const userMessage = { role: 'user', content: said };
+    messages.push(userMessage);
     // Only the current message goes to the model: `messages` feeds the
     // transcript, never the request, so no earlier turn is sent as context.
-    const turn = [{ role: 'user', content: said }];
+    const turn = [userMessage];
     render();
     clearStatus();
     inFlight = true;
@@ -1610,6 +1611,11 @@
     try {
       const ready = await ensureBrowserModel();
       if (mine !== flight || !ready) {
+        if (!ready && messages.at(-1) === userMessage) {
+          messages.pop();
+          render();
+          if (!form.hidden && !input.value) input.value = said;
+        }
         paint('ready');
         return;
       }
@@ -1635,7 +1641,7 @@
       if (mine === flight) {
         controller = null;
         inFlight = false;
-        if (mode === 'handsfree') armHandsFree();
+        if (mode === 'handsfree' && lastModelOptions.length) armHandsFree();
       }
     }
   }

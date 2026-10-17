@@ -26,4 +26,18 @@ test('browser model picker offers only compatible local models and rejects cloud
   assert.ok(menu.options.some((option) => option.base === 'Llama-3.2-1B-Instruct'));
   assert.ok(menu.options.every((option) => catalog.models.some((model) => model.id === option.id)));
   await assert.rejects(context.window.TalkModels.select('cloud:any'), /Unknown browser model/);
+
+  let matchCalls = 0;
+  context.caches = {
+    open: async () => ({
+      keys: async () => [],
+      match: async () => {
+        matchCalls += 1;
+        return null;
+      },
+    }),
+  };
+  const dl = await context.window.TalkModels.downloads();
+  assert.equal(dl.models.length, 0);
+  assert.equal(matchCalls, 0);
 });

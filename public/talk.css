@@ -120,184 +120,6 @@
   pointer-events: none;
 }
 
-/* Calling ripple waves radiating out from the reactor when connecting to SangAI */
-.talk-call-ripples {
-  position: absolute;
-  inset: 0;
-  display: grid;
-  place-items: center;
-  pointer-events: none;
-  z-index: 0;
-  opacity: 0;
-  transition: opacity .35s ease;
-}
-
-.talk-reactor.is-calling .talk-call-ripples {
-  opacity: 1;
-}
-
-.talk-call-ripples span {
-  position: absolute;
-  width: 28%;
-  height: 28%;
-  border-radius: 50%;
-  border: 1.5px solid rgba(45, 219, 240, .75);
-  box-shadow: 0 0 16px rgba(45, 219, 240, .55), inset 0 0 10px rgba(45, 219, 240, .25);
-  animation: talk-call-ripple-pulse 2.1s cubic-bezier(0.1, 0.7, 0.1, 1) infinite;
-  opacity: 0;
-}
-
-.talk-call-ripples span:nth-child(1) { animation-delay: 0s; }
-.talk-call-ripples span:nth-child(2) { animation-delay: 0.7s; }
-.talk-call-ripples span:nth-child(3) { animation-delay: 1.4s; }
-
-@keyframes talk-call-ripple-pulse {
-  0% {
-    transform: scale(0.6);
-    opacity: 0.95;
-    border-color: rgba(45, 219, 240, .9);
-  }
-  60% {
-    opacity: 0.45;
-  }
-  100% {
-    transform: scale(2.8);
-    opacity: 0;
-    border-color: rgba(45, 219, 240, 0);
-  }
-}
-
-.talk-reactor.is-calling .talk-mic {
-  animation: talk-orb-call-glow 1.5s ease-in-out infinite alternate;
-}
-
-@keyframes talk-orb-call-glow {
-  0% {
-    box-shadow: 0 0 12px rgba(45, 219, 240, .4), inset 0 0 8px rgba(45, 219, 240, .2);
-    border-color: rgba(45, 219, 240, .5);
-  }
-  100% {
-    box-shadow: 0 0 32px rgba(45, 219, 240, .85), inset 0 0 18px rgba(45, 219, 240, .4);
-    border-color: rgba(45, 219, 240, .9);
-  }
-}
-
-.talk-status.is-calling {
-  color: var(--cy);
-  text-shadow: 0 0 10px rgba(45, 219, 240, .5);
-  animation: talk-calling-text 1.5s ease-in-out infinite alternate;
-}
-
-@keyframes talk-calling-text {
-  0% { opacity: 0.65; }
-  100% { opacity: 1; }
-}
-
-/* Call / End Call button in Live mode */
-.talk-call-btn {
-  position: relative;
-  margin: 0 auto 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  height: 38px;
-  padding: 0 18px 0 14px;
-  border-radius: 999px;
-  cursor: pointer;
-  pointer-events: auto;
-  font: 12px/1 var(--mono);
-  letter-spacing: .06em;
-  text-transform: uppercase;
-  transition: all .2s ease;
-  user-select: none;
-  -webkit-user-select: none;
-  backdrop-filter: blur(8px);
-}
-
-.talk-call-btn[hidden] {
-  display: none !important;
-}
-
-.talk-call-btn svg {
-  display: none;
-  width: 16px;
-  height: 16px;
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 1.8;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
-/* Call state (idle) */
-.talk-call-btn[data-state="idle"] {
-  color: #fff;
-  background: linear-gradient(135deg, rgba(34, 197, 94, .28), rgba(4, 8, 14, .85));
-  border: 1px solid rgba(34, 197, 94, .55);
-  box-shadow: 0 0 14px rgba(34, 197, 94, .22), inset 0 1px 0 rgba(255, 255, 255, .1);
-}
-
-.talk-call-btn[data-state="idle"]:hover {
-  background: linear-gradient(135deg, rgba(34, 197, 94, .42), rgba(4, 8, 14, .9));
-  border-color: rgba(34, 197, 94, .8);
-  box-shadow: 0 0 22px rgba(34, 197, 94, .45);
-  transform: scale(1.03);
-}
-
-.talk-call-btn[data-state="idle"] .i-call {
-  display: block;
-}
-
-/* Calling state (connecting) */
-.talk-call-btn[data-state="calling"] {
-  color: #fecaca;
-  background: linear-gradient(135deg, rgba(239, 68, 68, .32), rgba(185, 28, 28, .6));
-  border: 1px solid rgba(239, 68, 68, .7);
-  box-shadow: 0 0 18px rgba(239, 68, 68, .4);
-  animation: talk-btn-call-pulse 1.3s ease-in-out infinite alternate;
-}
-
-.talk-call-btn[data-state="calling"]:hover {
-  background: linear-gradient(135deg, rgba(239, 68, 68, .48), rgba(185, 28, 28, .8));
-  border-color: rgba(239, 68, 68, .9);
-  box-shadow: 0 0 24px rgba(239, 68, 68, .6);
-  transform: scale(1.03);
-}
-
-.talk-call-btn[data-state="calling"] .i-end-call {
-  display: block;
-}
-
-@keyframes talk-btn-call-pulse {
-  0% { box-shadow: 0 0 12px rgba(239, 68, 68, .3); }
-  100% { box-shadow: 0 0 26px rgba(239, 68, 68, .65); }
-}
-
-/* In-call state (active) */
-.talk-call-btn[data-state="active"] {
-  color: #fff;
-  background: linear-gradient(135deg, rgba(239, 68, 68, .36), rgba(4, 8, 14, .85));
-  border: 1px solid rgba(239, 68, 68, .65);
-  box-shadow: 0 0 14px rgba(239, 68, 68, .28);
-}
-
-.talk-call-btn[data-state="active"]:hover {
-  background: linear-gradient(135deg, rgba(239, 68, 68, .5), rgba(4, 8, 14, .92));
-  border-color: rgba(239, 68, 68, .9);
-  box-shadow: 0 0 22px rgba(239, 68, 68, .5);
-  transform: scale(1.03);
-}
-
-.talk-call-btn[data-state="active"] .i-end-call {
-  display: block;
-}
-
-.talk-call-btn:focus-visible {
-  outline: 2px solid var(--cy);
-  outline-offset: 3px;
-}
-
 .talk-control {
   position: relative;
   display: inline-flex;
@@ -446,8 +268,6 @@
 }
 .talk-mode-tab:focus-visible { outline: 2px solid var(--cy); outline-offset: 2px; }
 .talk-mode-tab[hidden] { display: none; }
-#talk-form.is-live-off,
-#talk-voice-settings.is-live-off { display: none; }
 .talk-control:focus-visible, .talk-mic:focus-visible { outline: 2px solid var(--cy); outline-offset: 3px; }
 
 /* The menu hangs from the whole control bar (.graph-controls), not this button, so its
@@ -549,9 +369,6 @@
   box-shadow: 0 0 12px rgba(45, 219, 240, .4);
 }
 .talk-picker[role="tabpanel"][hidden] { display: none; }
-.talk-live[data-live="up"] { color: #4ade80; }
-.talk-live[data-live="busy"] { color: #fbbf24; }
-.talk-live[data-live="down"] { color: #f87171; }
 .talk-quota { display: flex; align-items: center; gap: 8px; min-width: 84px; --quota: #4ade80; }
 .talk-quota[data-level="medium"] { --quota: #fbbf24; }
 .talk-quota[data-level="low"] { --quota: #f87171; }
@@ -1154,10 +971,6 @@
     padding: 0;
     justify-content: center;
   }
-  /* Live is a coloured dot here; the word stays in the DOM for screen readers. */
-  #talk-cloud-table .talk-live { font-size: 0; }
-  #talk-cloud-table .talk-live::before { content: "●"; font-size: 14px; }
-  #talk-cloud-table td:first-child { white-space: normal; }
   .talk-quota { min-width: 64px; }
   .talk-hold {
     font-size: 12px;
@@ -1224,7 +1037,6 @@
   .graph-controls .talk-control,
   .graph-controls > .cc-btn.talk-control { height: 44px; }
   .talk-mode-tab[role="tab"] { min-height: 44px; }
-  .talk-call-btn { min-height: 44px; }
   .talk-settings-tabs { height: auto; }
   .site-footer a { display: inline-flex; align-items: center; min-height: 44px; }
   .site-legal a { display: inline-flex; align-items: center; min-height: 44px; }

@@ -56,16 +56,6 @@
         const brand = main.querySelector('.legal-brand');
         if (brand) brand.remove();
 
-        // Convert internal legal cross-links to switch panel tab
-        const crossLinks = main.querySelectorAll('a[href="/privacy"], a[href="/terms"]');
-        crossLinks.forEach(a => {
-          a.addEventListener('click', (e) => {
-            e.preventDefault();
-            const targetSlug = a.getAttribute('href').replace('/', '');
-            openPanel(targetSlug);
-          });
-        });
-
         cache[slug] = main.innerHTML;
         if (loadingEl) loadingEl.hidden = true;
         if (contentEl) {
@@ -110,10 +100,11 @@
       }
     }
 
-    // Intercept clicks on legal links
+    // Intercept clicks on legal links (except explicit new-tab links like #legal-panel-external)
     document.addEventListener('click', (e) => {
       const link = e.target.closest('a[href="/privacy"], a[href="/terms"]');
       if (!link) return;
+      if (link.target === '_blank' || link.id === 'legal-panel-external') return;
 
       // Allow modifier-key clicks (new tab / window)
       if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) {
