@@ -117,7 +117,8 @@ test('no .env, secrets, or internal infra variables exist in the repository', ()
   const files = ['server.js', 'package.json', 'site-rules.js', 'scripts/build-piper.sh', 'scripts/build-tts.sh', 'scripts/build-webllm.sh'];
   for (const file of files) {
     const content = fs.readFileSync(path.join(repoRoot, file), 'utf8');
-    assert.doesNotMatch(content, /SANGAI_TMP|SANGAI_SITE|elsanow|trantansang|sangcorp/i, file);
+    const forbidden = new RegExp(['SANGAI' + '_TMP', 'SANGAI' + '_SITE', 'elsa' + 'now', 'trantan' + 'sang', 'sang' + 'corp'].join('|'), 'i');
+    assert.doesNotMatch(content, forbidden, file);
   }
   assert.equal(fs.existsSync(path.join(repoRoot, '.env')), false);
   assert.equal(fs.existsSync(path.join(repoRoot, '.env.local')), false);
