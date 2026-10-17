@@ -122,5 +122,11 @@ If you find a bug, have a feature request, or wish to contribute, please [open a
 
 This project is open-source software licensed under the **MIT License**. See the [LICENSE](LICENSE) file for details.
 
+The speech engines and model assets have separate licenses:
+
+- **Piper**: [Piper software license (MIT)](https://github.com/rhasspy/piper/blob/master/LICENSE.md). Individual voice files have their own model cards and terms; this project bundles [English Lessac](https://huggingface.co/diffusionstudio/piper-voices/tree/840e38a7e26d813bd6221b78cfbaefa3585b3f71/en/en_US/lessac/medium) and [Vietnamese VAI1000](https://huggingface.co/diffusionstudio/piper-voices/tree/840e38a7e26d813bd6221b78cfbaefa3585b3f71/vi/vi_VN/vais1000/medium).
+- **Supertonic 3**: [sample code is MIT; model weights use OpenRAIL-M](https://huggingface.co/Supertone/supertonic-3), with the [full model license](https://huggingface.co/Supertone/supertonic-3/blob/main/LICENSE).
+- **Kokoro**: the [Kokoro 82M ONNX model is Apache-2.0](https://huggingface.co/onnx-community/Kokoro-82M-v1.0-ONNX/tree/1939ad2a8e416c0acfeecc08a694d14ef25f2231).
+
 Copyright (c) 2026 SangAI (Sang <sang@sangai.today>) and contributors.
 Third-party model icon notices are documented in `public/vendor/model-icons/NOTICE.md`.
