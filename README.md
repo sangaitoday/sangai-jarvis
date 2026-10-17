@@ -4,6 +4,12 @@ SangAI Javis is the open-source, on-device voice and conversational assistant fr
 
 All neural language models run on-device via **WebGPU** ([WebLLM](https://webllm.mlc.ai/)), and all neural speech synthesis models run locally via **WebAssembly and WebGPU ONNX** (Piper, Supertonic 3, Kokoro). No cloud model APIs, external backend proxies, API keys, or server `.env` secrets are required.
 
+## Preview
+
+[Open the live SangAI Javis demo](https://www.sangai.today/).
+
+[![SangAI website with the Javis voice orb, push-to-talk controls, and navigation](assets/screenshots/sangai-live-demo.png)](https://www.sangai.today/)
+
 ---
 
 ## Quick Start
