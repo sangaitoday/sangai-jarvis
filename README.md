@@ -1,25 +1,121 @@
 # SangAI Javis
 
-SangAI Javis is the open-source, browser-only edition of the [www.sangai.today](https://www.sangai.today) voice interface. It keeps the exact `www.sangai.today` UI, 2D/3D reactive orb, on-device WebLLM model picker, and local ONNX (Piper, Supertonic 3, Kokoro) + browser voice synthesis, with all cloud model routers, Live call mode, and server `.env` dependencies removed.
+SangAI Javis is the open-source, on-device voice and conversational assistant from [SangAI](https://www.sangai.today). It delivers the exact interface and interactive experience of [www.sangai.today](https://www.sangai.today) — featuring a reactive 2D/3D orb, real-time push-to-talk speech recognition, and low-latency voice synthesis — running **100% locally in your browser**.
 
-## Run locally
+All neural language models run on-device via **WebGPU** ([WebLLM](https://webllm.mlc.ai/)), and all neural speech synthesis models run locally via **WebAssembly and WebGPU ONNX** (Piper, Supertonic 3, Kokoro). No cloud model APIs, external backend proxies, API keys, or server `.env` secrets are required.
 
-Requirements: Node.js, npm, `curl`, `sha256sum`, and a recent browser with WebGPU. Microphone use requires `localhost` or HTTPS.
+---
+
+## Quick Start
+
+### 1. Prerequisites
+- **Node.js**: v18.0.0 or later and `npm`
+- **System tools**: `curl` and `sha256sum` (standard on macOS and Linux)
+- **WebGPU Browser**: A modern browser with WebGPU enabled:
+  - **Chrome / Chromium / Brave / Edge**: version 113+ (ensure Hardware Acceleration is enabled)
+  - **Safari**: version 18+ on macOS Sequoia or iOS 18+ (with WebGPU enabled)
+  - **Firefox**: version 128+ with `dom.webgpu.enabled` in `about:config`
+- **Microphone**: For voice input (browsers require `http://localhost`, `http://127.0.0.1`, or HTTPS for microphone permissions)
+
+### 2. Clone and Install
+
+```sh
+# Clone the repository
+git clone https://github.com/sangaitoday/sangai-javis.git
+cd sangai-javis
+
+# Install dependencies
+npm install
+```
+
+### 3. Build Runtime Assets
+
+Build the WebLLM engine bundle, ONNX runtime bundles, and download the base voices:
 
 ```sh
 npm run assets
+```
+
+> **Note:** The compiled runtime packages and model binaries under `public/webllm/` and `public/onnx/` are gitignored. Running `npm run assets` populates them locally. If you run `npm start` directly on a fresh clone, the included `prestart` hook will run this automatically if the bundles are missing.
+
+### 4. Run the Test Suite
+
+```sh
 npm test
+```
+
+### 5. Start the Server
+
+```sh
 npm start
 ```
 
-Open <http://127.0.0.1:8080>. `npm run assets` builds the WebLLM and ONNX runtime bundles and downloads the two default Piper voices under `public/` (gitignored). `npm start` runs the zero-dependency static server (`server.js`) with no `.env` required, or you can serve `public/` from any static host.
+By default, the server runs on `http://127.0.0.1:8080`.
 
-## Models and voices
+To specify a custom port or host:
 
-- **On-device models (`On this device`)**: 159 WebLLM model variants (65 model families), filtered and ranked automatically for your GPU and memory. Weights download from Hugging Face into your browser cache on first use and can be deleted anytime from the `Models` tab.
-- **Local ONNX & browser voices (`Voice`)**: 162 downloadable ONNX voices across Piper, Supertonic 3 (WebGPU), and Kokoro, plus your browser's built-in `speechSynthesis` voices, with search, grouping, preview, and one-click batch download/delete.
-- **Push-to-talk & Hands-free**: Uses your browser's `SpeechRecognition` (including on-device `processLocally` where supported), falling back to text input when speech recognition is unavailable.
+```sh
+PORT=9009 HOST=127.0.0.1 npm start
+```
+
+Open your browser and navigate to <http://127.0.0.1:8080>.
+
+---
+
+## Running with HTTPS / Mobile Devices
+
+Microphone permissions in Web browsers require a **secure context** (`http://localhost` or HTTPS). If you want to access your Javis instance from your phone or across the network, expose the server over HTTPS using a lightweight tunnel such as Cloudflare Tunnel:
+
+```sh
+cloudflared tunnel --url http://127.0.0.1:8080
+```
+
+---
+
+## Features
+
+### 1. On-Device LLMs (`On this device`)
+- **159 WebLLM model variants** across 65 model families (including Llama 3.2, Qwen 2.5, Gemma 2, Phi 3.5, Mistral, and DeepSeek).
+- **Automatic hardware gating**: Evaluates your GPU vendor, memory limits, and float16 shader support to filter and rank only the models that run smoothly on your device.
+- **Client-side storage**: Model weights stream directly from Hugging Face into your browser's Cache Storage on first use. You can download or delete model weights at any time from the `Models` drawer.
+
+### 2. Local Voice Engine (`Voice`)
+- **162 downloadable offline voices**:
+  - **Piper**: High-speed, lightweight neural speech running via ONNX Runtime WebAssembly SIMD.
+  - **Supertonic 3**: Expressive neural speech synthesis running via WebGPU.
+  - **Kokoro**: High-fidelity, natural sounding neural voice synthesis.
+- **Browser built-in voices**: Instant fallback to your operating system's native `speechSynthesis` voices without downloading any model files.
+- **Voice management**: Filter by language and name, group by gender or provider, preview samples, and batch download or clear voice caches.
+
+### 3. Interactive Orb & Audio Visualizer
+- **Reactive 2D/3D Orb**: Renders a dynamic particle lattice and audio reactor that responds to speech and state changes (Ready, Listening, Thinking, Speaking).
+- **Push-to-Talk & Hands-Free**: Hold the Spacebar or press and hold the Orb to speak. You can switch to continuous Hands-Free mode or toggle the text input field anytime.
+
+---
+
+## Architecture & Zero-Cloud Guarantee
+
+- **Zero API Keys**: No accounts, credit cards, or tokens required.
+- **Zero Server State**: `server.js` is a static file server with byte-range streaming (`Range: bytes`), immutable asset caching, and trailing-slash normalization. You can also host the `public/` directory on any static provider (Cloudflare Pages, Vercel, GitHub Pages, Nginx).
+- **Private & Local**: Your audio and prompt text never leave your computer. Model inference executes on your local GPU via WebGPU.
+
+---
+
+## About SangAI
+
+[SangAI](https://www.sangai.today) is an autonomous, open-source AI platform and personal agent architecture developed by **Sang** ([sang@sangai.today](mailto:sang@sangai.today)).
+
+- **Website**: [www.sangai.today](https://www.sangai.today)
+- **Repository**: [github.com/sangaitoday/sangai-javis](https://github.com/sangaitoday/sangai-javis)
+- **Contact & Inquiries**: [sang@sangai.today](mailto:sang@sangai.today)
+
+If you find a bug, have a feature request, or wish to contribute, please [open an issue](https://github.com/sangaitoday/sangai-javis/issues) on GitHub or contact Sang directly.
+
+---
 
 ## License
 
-MIT License — see [LICENSE](LICENSE). Third-party model icon notices are in `public/vendor/model-icons/NOTICE.md`.
+This project is open-source software licensed under the **MIT License**. See the [LICENSE](LICENSE) file for details.
+
+Copyright (c) 2026 SangAI (Sang <sang@sangai.today>) and contributors.
+Third-party model icon notices are documented in `public/vendor/model-icons/NOTICE.md`.

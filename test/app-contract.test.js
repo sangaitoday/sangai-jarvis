@@ -94,3 +94,20 @@ test('static server serves index, legal pages, trailing slashes, HEAD, Range 206
     await new Promise((resolve) => server.close(resolve));
   }
 });
+
+test('README and LICENSE include setup instructions, SangAI info, and contact email', () => {
+  const readme = fs.readFileSync(path.resolve(__dirname, '../README.md'), 'utf8');
+  const license = fs.readFileSync(path.resolve(__dirname, '../LICENSE'), 'utf8');
+
+  assert.match(readme, /git clone/);
+  assert.match(readme, /npm install/);
+  assert.match(readme, /npm run assets/);
+  assert.match(readme, /npm start/);
+  assert.match(readme, /WebGPU/);
+  assert.match(readme, /sang@sangai\.today/);
+  assert.match(readme, /https:\/\/www\.sangai\.today/);
+  assert.match(readme, /SangAI/);
+
+  assert.match(license, /sang@sangai\.today/);
+  assert.match(license, /SangAI/);
+});
