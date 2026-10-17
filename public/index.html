@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#10131c">
+  <link rel="icon" href="data:,">
+  <title>Javis — browser voice chat</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <main class="app">
+    <header>
+      <div class="mark" aria-hidden="true">J</div>
+      <div><p class="eyebrow">SangAI</p><h1>Javis</h1><p class="subtitle">Voice chat on your device</p></div>
+    </header>
+    <section class="setup" aria-label="Conversation settings">
+      <label>Browser model <select id="model"><option value="">Finding models…</option></select></label>
+      <label>Voice <select id="voice"><option value="">Finding voices…</option></select></label>
+      <p class="privacy">Model replies run in this browser. The first use downloads model files. Browser speech recognition and browser voices may use your browser vendor's online service; choose a downloaded voice for on-device output.</p>
+    </section>
+    <section class="conversation" aria-label="Conversation">
+      <div id="lines" class="lines" role="log" aria-live="polite" aria-relevant="additions text">
+        <p class="empty">Choose a model to begin.</p>
+      </div>
+      <p id="status" class="status" role="status">Checking this device…</p>
+      <div class="modes" role="group" aria-label="Microphone mode">
+        <button id="push-mode" type="button" aria-pressed="true">Push to talk</button>
+        <button id="handsfree-mode" type="button" aria-pressed="false" disabled>Hands-free</button>
+      </div>
+      <div class="controls">
+        <button id="mic" class="mic" type="button" disabled>Hold to talk</button>
+        <button id="stop" type="button">Stop reply</button>
+      </div>
+      <form id="form"><label class="visually-hidden" for="message">Message</label><input id="message" name="message" placeholder="Or type a message" autocomplete="off"><button type="submit">Send</button></form>
+    </section>
+    <footer>Runs as a static site. No chat API or account is required.</footer>
+  </main>
+  <script src="/talk-models-core.js"></script>
+  <script src="/talk-models.js"></script>
+  <script src="/tts-runtime.js"></script>
+  <script src="/conversation.js"></script>
+  <script src="/app.js"></script>
+</body>
+</html>

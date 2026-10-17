@@ -1,0 +1,200 @@
+{
+  "evalVersion": 1,
+  "date": "2026-09-27",
+  "runner": "webllm 0.2.85 in chrome (nvidia pascal)",
+  "efficiency": 0.33,
+  "models": {
+    "SmolLM2-360M-Instruct": {
+      "mmluPro": 8.0,
+      "ifeval": 22.0,
+      "quality": 15.0,
+      "evaluatedId": "SmolLM2-360M-Instruct-q4f32_1-MLC"
+    },
+    "TinyLlama-1.1B-Chat-v1.0": {
+      "mmluPro": 13.5,
+      "ifeval": 10.0,
+      "quality": 11.8,
+      "evaluatedId": "TinyLlama-1.1B-Chat-v1.0-q4f32_1-MLC"
+    },
+    "TinyLlama-1.1B-Chat-v0.4": {
+      "mmluPro": 13.0,
+      "ifeval": 15.0,
+      "quality": 14.0,
+      "evaluatedId": "TinyLlama-1.1B-Chat-v0.4-q4f32_1-MLC"
+    },
+    "Qwen2.5-0.5B-Instruct": {
+      "mmluPro": 11.5,
+      "ifeval": 21.0,
+      "quality": 16.2,
+      "evaluatedId": "Qwen2.5-0.5B-Instruct-q4f32_1-MLC"
+    },
+    "Qwen2.5-Coder-0.5B-Instruct": {
+      "mmluPro": 11.5,
+      "ifeval": 21.0,
+      "quality": 16.2,
+      "evaluatedId": "Qwen2.5-Coder-0.5B-Instruct-q4f32_1-MLC"
+    },
+    "Llama-3.2-1B-Instruct": {
+      "mmluPro": 14.0,
+      "ifeval": 44.0,
+      "quality": 29.0,
+      "evaluatedId": "Llama-3.2-1B-Instruct-q4f32_1-MLC"
+    },
+    "phi-1_5": {
+      "mmluPro": 6.0,
+      "ifeval": 4.0,
+      "quality": 5.0,
+      "evaluatedId": "phi-1_5-q4f32_1-MLC"
+    },
+    "gemma-2b-it": {
+      "mmluPro": 15.0,
+      "ifeval": 18.0,
+      "quality": 16.5,
+      "evaluatedId": "gemma-2b-it-q4f32_1-MLC"
+    },
+    "Qwen2.5-1.5B-Instruct": {
+      "mmluPro": 20.5,
+      "ifeval": 29.0,
+      "quality": 24.8,
+      "evaluatedId": "Qwen2.5-1.5B-Instruct-q4f32_1-MLC"
+    },
+    "Qwen2.5-Coder-1.5B-Instruct": {
+      "mmluPro": 18.0,
+      "ifeval": 26.0,
+      "quality": 22.0,
+      "evaluatedId": "Qwen2.5-Coder-1.5B-Instruct-q4f32_1-MLC"
+    },
+    "Qwen2.5-Math-1.5B-Instruct": {
+      "mmluPro": 2.5,
+      "ifeval": 9.0,
+      "quality": 5.8,
+      "evaluatedId": "Qwen2.5-Math-1.5B-Instruct-q4f32_1-MLC"
+    },
+    "Qwen2-1.5B-Instruct": {
+      "mmluPro": 17.5,
+      "ifeval": 16.0,
+      "quality": 16.8,
+      "evaluatedId": "Qwen2-1.5B-Instruct-q4f32_1-MLC"
+    },
+    "Qwen2-Math-1.5B-Instruct": {
+      "mmluPro": 3.0,
+      "ifeval": 13.0,
+      "quality": 8.0,
+      "evaluatedId": "Qwen2-Math-1.5B-Instruct-q4f32_1-MLC"
+    },
+    "Qwen3.5-0.8B": {
+      "mmluPro": 20.5,
+      "ifeval": 52.0,
+      "quality": 36.2,
+      "evaluatedId": "Qwen3.5-0.8B-q4f32_1-MLC"
+    },
+    "Qwen3-0.6B": {
+      "mmluPro": 12.5,
+      "ifeval": 53.0,
+      "quality": 32.8,
+      "evaluatedId": "Qwen3-0.6B-q4f32_1-MLC"
+    },
+    "OLMo-2-0425-1B-Instruct": {
+      "mmluPro": 9.5,
+      "ifeval": 49.0,
+      "quality": 29.2,
+      "evaluatedId": "OLMo-2-0425-1B-Instruct-q4f32_1-MLC"
+    },
+    "gemma-2-2b-it": {
+      "mmluPro": 19.5,
+      "ifeval": 51.0,
+      "quality": 35.2,
+      "evaluatedId": "gemma-2-2b-it-q4f32_1-MLC"
+    },
+    "gemma-2-2b-jpn-it": {
+      "mmluPro": 16.0,
+      "ifeval": 45.0,
+      "quality": 30.5,
+      "evaluatedId": "gemma-2-2b-jpn-it-q4f32_1-MLC"
+    },
+    "Qwen3.5-2B": {
+      "mmluPro": 26.5,
+      "ifeval": 60.0,
+      "quality": 43.2,
+      "evaluatedId": "Qwen3.5-2B-q4f32_1-MLC"
+    },
+    "Qwen3-1.7B": {
+      "mmluPro": 21.5,
+      "ifeval": 63.0,
+      "quality": 42.2,
+      "evaluatedId": "Qwen3-1.7B-q4f32_1-MLC"
+    },
+    "SmolLM2-1.7B-Instruct": {
+      "mmluPro": 13.5,
+      "ifeval": 30.0,
+      "quality": 21.8,
+      "evaluatedId": "SmolLM2-1.7B-Instruct-q4f32_1-MLC"
+    },
+    "Qwen2.5-3B-Instruct": {
+      "mmluPro": 10.0,
+      "ifeval": 53.0,
+      "quality": 31.5,
+      "evaluatedId": "Qwen2.5-3B-Instruct-q4f32_1-MLC"
+    },
+    "Qwen2.5-Coder-3B-Instruct": {
+      "mmluPro": 26.0,
+      "ifeval": 34.0,
+      "quality": 30.0,
+      "evaluatedId": "Qwen2.5-Coder-3B-Instruct-q4f32_1-MLC"
+    },
+    "Llama-3.2-3B-Instruct": {
+      "mmluPro": 28.0,
+      "ifeval": 59.0,
+      "quality": 43.5,
+      "evaluatedId": "Llama-3.2-3B-Instruct-q4f32_1-MLC"
+    },
+    "Hermes-3-Llama-3.2-3B": {
+      "mmluPro": 19.0,
+      "ifeval": 29.0,
+      "quality": 24.0,
+      "evaluatedId": "Hermes-3-Llama-3.2-3B-q4f32_1-MLC"
+    },
+    "stablelm-2-zephyr-1_6b": {
+      "mmluPro": 9.5,
+      "ifeval": 20.0,
+      "quality": 14.8,
+      "evaluatedId": "stablelm-2-zephyr-1_6b-q4f32_1-MLC"
+    },
+    "Ministral-3-3B-Base-2512": {
+      "mmluPro": 18.0,
+      "ifeval": 13.0,
+      "quality": 15.5,
+      "evaluatedId": "Ministral-3-3B-Base-2512-q4f32_1-MLC"
+    },
+    "Ministral-3-3B-Reasoning-2512": {
+      "mmluPro": 3.0,
+      "ifeval": 12.0,
+      "quality": 7.5,
+      "evaluatedId": "Ministral-3-3B-Reasoning-2512-q4f32_1-MLC"
+    },
+    "Ministral-3-3B-Instruct-2512-BF16": {
+      "mmluPro": 14.0,
+      "ifeval": 27.0,
+      "quality": 20.5,
+      "evaluatedId": "Ministral-3-3B-Instruct-2512-BF16-q4f32_1-MLC"
+    },
+    "RedPajama-INCITE-Chat-3B-v1": {
+      "mmluPro": 0.0,
+      "ifeval": 0.0,
+      "quality": 0.0,
+      "evaluatedId": "RedPajama-INCITE-Chat-3B-v1-q4f32_1-MLC"
+    },
+    "phi-2": {
+      "mmluPro": 1.0,
+      "ifeval": 4.0,
+      "quality": 2.5,
+      "evaluatedId": "phi-2-q4f32_1-MLC"
+    },
+    "Phi-4-mini-instruct": {
+      "mmluPro": 25.5,
+      "ifeval": 41.0,
+      "quality": 33.2,
+      "evaluatedId": "Phi-4-mini-instruct-q4f32_1-MLC"
+    }
+  }
+}

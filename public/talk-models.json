@@ -1,0 +1,58 @@
+{
+  "webllm": "0.2.85",
+  "models": [
+    {
+      "id": "Qwen3-0.6B-q4f16_1-MLC",
+      "base": "Qwen3-0.6B",
+      "quant": "q4f16_1",
+      "short": false,
+      "vramMB": 1403.34,
+      "f16": true,
+      "contextWindow": 4096,
+      "bufferBytes": null,
+      "vision": false,
+      "url": "https://huggingface.co/mlc-ai/Qwen3-0.6B-q4f16_1-MLC/resolve/main/",
+      "lib": "https://raw.githubusercontent.com/mlc-ai/binary-mlc-llm-libs/main/web-llm-models/v0_2_84/base/Qwen3-0.6B-q4f16_1_cs1k-webgpu.wasm"
+    },
+    {
+      "id": "Qwen3-0.6B-q4f32_1-MLC",
+      "base": "Qwen3-0.6B",
+      "quant": "q4f32_1",
+      "short": false,
+      "vramMB": 1924.98,
+      "f16": false,
+      "contextWindow": 4096,
+      "bufferBytes": null,
+      "vision": false,
+      "url": "https://huggingface.co/mlc-ai/Qwen3-0.6B-q4f32_1-MLC/resolve/main/",
+      "lib": "https://raw.githubusercontent.com/mlc-ai/binary-mlc-llm-libs/main/web-llm-models/v0_2_84/base/Qwen3-0.6B-q4f32_1_cs1k-webgpu.wasm"
+    },
+    {
+      "id": "Qwen3-1.7B-q4f16_1-MLC",
+      "base": "Qwen3-1.7B",
+      "quant": "q4f16_1",
+      "short": false,
+      "vramMB": 2036.66,
+      "f16": true,
+      "contextWindow": 4096,
+      "bufferBytes": null,
+      "vision": false,
+      "url": "https://huggingface.co/mlc-ai/Qwen3-1.7B-q4f16_1-MLC/resolve/main/",
+      "lib": "https://raw.githubusercontent.com/mlc-ai/binary-mlc-llm-libs/main/web-llm-models/v0_2_84/base/Qwen3-1.7B-q4f16_1_cs1k-webgpu.wasm"
+    },
+    {
+      "id": "Qwen3-1.7B-q4f32_1-MLC",
+      "base": "Qwen3-1.7B",
+      "quant": "q4f32_1",
+      "short": false,
+      "vramMB": 2635.44,
+      "f16": false,
+      "contextWindow": 4096,
+      "bufferBytes": null,
+      "vision": false,
+      "url": "https://huggingface.co/mlc-ai/Qwen3-1.7B-q4f32_1-MLC/resolve/main/",
+      "lib": "https://raw.githubusercontent.com/mlc-ai/binary-mlc-llm-libs/main/web-llm-models/v0_2_84/base/Qwen3-1.7B-q4f32_1_cs1k-webgpu.wasm"
+    }
+  ],
+  "bundle": "0.2.85/f702fdd32d47"
+}
