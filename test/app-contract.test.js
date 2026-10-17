@@ -10,7 +10,7 @@ const { cacheControlFor, MIME, PAGES } = require('../site-rules.js');
 const root = path.resolve(__dirname, '../public');
 const read = (file) => fs.readFileSync(path.join(root, file), 'utf8');
 
-test('public app keeps the www.sangai.today UI and local model/voice controls without cloud or live mode', () => {
+test('public app keeps the SangAI UI and local model/voice controls without cloud or live mode', () => {
   const html = read('index.html');
   const talk = read('talk.js');
   for (const id of [
@@ -95,9 +95,10 @@ test('static server serves index, legal pages, trailing slashes, HEAD, Range 206
   }
 });
 
-test('README and LICENSE include setup instructions, SangAI info, and contact email', () => {
+test('README and LICENSE include setup instructions, SangAI info, and contact email without hardcoded site URLs', () => {
   const readme = fs.readFileSync(path.resolve(__dirname, '../README.md'), 'utf8');
   const license = fs.readFileSync(path.resolve(__dirname, '../LICENSE'), 'utf8');
+  const pkg = JSON.parse(fs.readFileSync(path.resolve(__dirname, '../package.json'), 'utf8'));
 
   assert.match(readme, /git clone/);
   assert.match(readme, /npm install/);
@@ -105,11 +106,18 @@ test('README and LICENSE include setup instructions, SangAI info, and contact em
   assert.match(readme, /npm start/);
   assert.match(readme, /WebGPU/);
   assert.match(readme, /sang@sangai\.today/);
-  assert.match(readme, /https:\/\/www\.sangai\.today/);
   assert.match(readme, /SangAI/);
 
   assert.match(license, /sang@sangai\.today/);
   assert.match(license, /SangAI/);
+
+  // Ensure no hardcoded URLs to the sangai.today site exist in readme, package.json, or HTML
+  const siteUrlRe = /https?:\/\/(?:www\.)?sangai\.today/i;
+  assert.doesNotMatch(readme, siteUrlRe);
+  assert.doesNotMatch(JSON.stringify(pkg), siteUrlRe);
+  assert.doesNotMatch(read('index.html'), siteUrlRe);
+  assert.doesNotMatch(read('privacy.html'), siteUrlRe);
+  assert.doesNotMatch(read('terms.html'), siteUrlRe);
 });
 
 test('no .env, secrets, or internal infra variables exist in the repository', () => {

@@ -1,6 +1,6 @@
 # SangAI Javis
 
-SangAI Javis is the open-source, on-device voice and conversational assistant from [SangAI](https://www.sangai.today). It delivers the exact interface and interactive experience of [www.sangai.today](https://www.sangai.today) — featuring a reactive 2D/3D orb, real-time push-to-talk speech recognition, and low-latency voice synthesis — running **100% locally in your browser**.
+SangAI Javis is the open-source, on-device voice and conversational assistant from SangAI. It delivers the full interactive voice interface — featuring a reactive 2D/3D orb, real-time push-to-talk speech recognition, and low-latency voice synthesis — running **100% locally in your browser**.
 
 All neural language models run on-device via **WebGPU** ([WebLLM](https://webllm.mlc.ai/)), and all neural speech synthesis models run locally via **WebAssembly and WebGPU ONNX** (Piper, Supertonic 3, Kokoro). No cloud model APIs, external backend proxies, API keys, or server `.env` secrets are required.
 
@@ -103,9 +103,8 @@ cloudflared tunnel --url http://127.0.0.1:8080
 
 ## About SangAI
 
-[SangAI](https://www.sangai.today) is an autonomous, open-source AI platform and personal agent architecture developed by **Sang** ([sang@sangai.today](mailto:sang@sangai.today)).
+**SangAI** is an autonomous, open-source AI platform and personal agent architecture developed by **Sang** ([sang@sangai.today](mailto:sang@sangai.today)).
 
-- **Website**: [www.sangai.today](https://www.sangai.today)
 - **Repository**: [github.com/sangaitoday/sangai-javis](https://github.com/sangaitoday/sangai-javis)
 - **Contact & Inquiries**: [sang@sangai.today](mailto:sang@sangai.today)
 
