@@ -21,6 +21,9 @@ test('browser model picker offers only compatible local models and rejects cloud
   };
   vm.runInNewContext(fs.readFileSync(path.resolve(__dirname, '../public/talk-models.js'), 'utf8'), context);
   const menu = await context.window.TalkModels.prepareMenu();
-  assert.deepEqual(menu.options.map((option) => option.base).sort(), ['Qwen3-0.6B', 'Qwen3-1.7B']);
+  assert.ok(menu.options.length > 20);
+  assert.ok(menu.options.some((option) => option.base === 'Qwen3-0.6B'));
+  assert.ok(menu.options.some((option) => option.base === 'Llama-3.2-1B-Instruct'));
+  assert.ok(menu.options.every((option) => catalog.models.some((model) => model.id === option.id)));
   await assert.rejects(context.window.TalkModels.select('cloud:any'), /Unknown browser model/);
 });

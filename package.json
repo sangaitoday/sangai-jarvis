@@ -5,7 +5,8 @@
   "description": "Browser-only model and voice chat",
   "scripts": {
     "test": "node --test test/*.test.js",
-    "assets": "bash scripts/build-webllm.sh && bash scripts/build-piper.sh",
-    "dev": "python3 -m http.server 8080 --directory public"
+    "assets": "bash scripts/build-webllm.sh && bash scripts/build-piper.sh && bash scripts/build-tts.sh",
+    "start": "node server.js",
+    "dev": "node server.js"
   }
 }

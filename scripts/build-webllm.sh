@@ -46,7 +46,7 @@ const { buildCatalog } = require(path.join(process.argv[3], 'talk-models-catalog
 const version = require(path.join(process.argv[2], 'node_modules/@mlc-ai/web-llm/package.json')).version;
 const destination = path.join(process.argv[3], 'public/talk-models.json');
 const temporary = `${destination}.tmp`;
-const data = Buffer.from(`${JSON.stringify({ ...buildCatalog(prebuiltAppConfig.model_list.filter((row) => /^Qwen3-(0\.6B|1\.7B)-q4f(16|32)_1-MLC$/.test(row.model_id)), version), bundle: process.argv[4] }, null, 2)}\n`);
+const data = Buffer.from(`${JSON.stringify({ ...buildCatalog(prebuiltAppConfig.model_list, version), bundle: process.argv[4] }, null, 2)}\n`);
 const fd = fs.openSync(temporary, 'w');
 try {
   fs.writeSync(fd, data);

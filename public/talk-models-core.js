@@ -1,6 +1,6 @@
 'use strict';
 (function () {
-  const TALK_BRIEF = 'You are Javis, a concise browser-only voice assistant. You have no access to accounts, files, or live information unless the user provides it.';
+  const TALK_BRIEF = 'You are SangAI. Be warm, brief, and playful. Use only the facts in this note.';
   const MIN_TOKS = 5;
   const SPEED_CAP = 30;
   const MEMORY_SHARE = 0.6;
@@ -68,6 +68,56 @@
     return `${bytes} B`;
   }
 
+  // Vendor logo for a model name, or null when none is known (the table then shows the generic
+  // glyph). Order matters: fine-tunes carry their base model in the name (Hermes-3-Llama,
+  // Llama-3.1-Nemotron, DeepSeek-R1-Distill-Qwen), so the publisher is matched before the base family. TinyLlama is a community model, not Meta's.
+  const MODEL_ICONS = [
+    [/^auto$/i, '/vendor/model-icons/auto.svg'],
+    [/^sangai$/i, '/sangai-logo.jpg'],
+    [/^built-?in$/i, '/vendor/model-icons/gemini.svg'],
+    [/nemotron|nvidia/i, '/vendor/model-icons/nvidia.svg'],
+    [/hermes/i, '/vendor/model-icons/nousresearch.svg'],
+    [/deepseek/i, '/vendor/model-icons/deepseek.svg'],
+    [/tinyllama/i, null],
+    [/wizard/i, '/vendor/model-icons/microsoft.svg'],
+    [/qwen/i, '/vendor/model-icons/qwen.svg'],
+    [/llama/i, '/vendor/model-icons/meta.svg'],
+    [/^phi/i, '/vendor/model-icons/microsoft.svg'],
+    [/gemma/i, '/vendor/model-icons/gemma.svg'],
+    [/smollm/i, '/vendor/model-icons/huggingface.svg'],
+    [/m(in)?istral/i, '/vendor/model-icons/mistral.svg'],
+    [/olmo/i, '/vendor/model-icons/ai2.svg'],
+    [/stablelm/i, '/vendor/model-icons/stability.svg'],
+    [/redpajama/i, '/vendor/model-icons/together.svg'],
+  ];
+
+  // Readable Title Case for a model or voice id: hyphens and underscores become spaces, a
+  // lowercase word gets a capital, a mixed-case word (TinyLlama, SmolLM2) and an acronym stay
+  // as written, and a size token (31b, a12b, 1.5b) is upper-cased.
+  const SIZE_TOKEN = /^(?:\d+(?:\.\d+)?|[a-z]\d+)[bkmt]$/i;
+
+  function displayName(name) {
+    return String(name ?? '').split(/[\s_-]+/).filter(Boolean).map((word) => {
+      if (SIZE_TOKEN.test(word)) return word.toUpperCase();
+      if (/[a-z]/.test(word) && /[A-Z]/.test(word)) return word;
+      if (!/[a-z]/.test(word)) return word;
+      return word.replace(/[a-z]/, (letter) => letter.toUpperCase());
+    }).join(' ');
+  }
+
+  const GENERIC_MODEL_ICON = '/vendor/model-icons/generic.svg';
+
+  function iconForModel(name) {
+    const text = String(name || '');
+    if (!text) return null;
+    for (const [pattern, icon] of MODEL_ICONS) if (pattern.test(text)) return icon;
+    return null;
+  }
+
+  function modelDisplayName(name) {
+    return displayName(name);
+  }
+
   function deviceSummary(adapterInfo, bandwidthGBs, uaData, userAgent) {
     if (!adapterInfo) return null;
     const gpu = adapterInfo.description || [adapterInfo.vendor, adapterInfo.architecture].filter(Boolean).join(' ') || 'this GPU';
@@ -91,6 +141,10 @@
     UNKNOWN_MEMORY_MB,
     talkModelOptions,
     trimHistory,
+    iconForModel,
+    modelDisplayName,
+    GENERIC_MODEL_ICON,
+    displayName,
     deviceSummary,
   };
   if (typeof window !== 'undefined') window.TalkModelsCore = api;

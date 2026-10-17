@@ -1,6 +1,6 @@
 'use strict';
 (function () {
-  // One loader for the ONNX voice engines, shared by Talk and the dashboard's Javis.
+  // One loader for the browser's ONNX voice engines.
   // Each engine is an ESM bundle exporting speak(text, voice, opts) → WAV Blob and dispose().
   // A bundle is imported once per page; a failed import is forgotten so the next call retries.
   function create({ bundleFor, importer = (url) => import(url) }) {

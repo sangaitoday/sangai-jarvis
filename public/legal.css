@@ -1,0 +1,126 @@
+/* Long-form legal pages (/privacy, /terms). Same dark palette as style.css,
+ * which stays homepage-only: its full-height floor rules would clip a long page. */
+:root {
+  color-scheme: dark;
+  --bg: #05060c;
+  --panel: #0a0f1a;
+  --line: #16303c;
+  --cy: #2ddbf0;
+  --ink: #d7f3fa;
+  --body: #b8d3dc;
+  --muted: #5f8ea0;
+  --mono: ui-monospace, "Cascadia Mono", Menlo, Consolas, monospace;
+  --sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html { background: var(--bg); }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--body);
+  font: 16px/1.65 var(--sans);
+  -webkit-text-size-adjust: 100%;
+}
+
+.container,
+.legal {
+  width: 100%;
+  margin: 0 auto;
+  padding: 32px 16px 64px;
+}
+
+@media (min-width: 576px) {
+  .container, .legal { max-width: 540px; }
+}
+@media (min-width: 768px) {
+  .container, .legal { max-width: 720px; }
+}
+@media (min-width: 992px) {
+  .container, .legal { max-width: 960px; }
+}
+@media (min-width: 1200px) {
+  .container, .legal { max-width: 1140px; }
+}
+@media (min-width: 1400px) {
+  .container, .legal { max-width: 1320px; }
+}
+
+.legal h1,
+.legal h2,
+.legal h3,
+.legal p,
+.legal ul,
+.legal-meta,
+.legal-note,
+.legal-foot {
+  width: 100%;
+  max-width: 100%;
+}
+
+.legal-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--ink);
+  font: 600 14px/1 var(--mono);
+  letter-spacing: .08em;
+  text-decoration: none;
+}
+.legal-brand img { width: 28px; height: 28px; border-radius: 50%; }
+
+h1 {
+  margin: 36px 0 4px;
+  color: var(--ink);
+  font-size: 30px;
+  line-height: 1.2;
+}
+.legal-meta { margin: 0 0 28px; color: var(--muted); font: 13px/1.5 var(--mono); }
+
+h2 {
+  margin: 36px 0 8px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+  color: var(--ink);
+  font-size: 19px;
+  line-height: 1.3;
+}
+h3 { margin: 22px 0 6px; color: var(--ink); font-size: 16px; }
+
+p, ul { margin: 0 0 14px; }
+ul { padding-left: 22px; }
+li { margin-bottom: 6px; }
+strong { color: var(--ink); }
+
+a { color: var(--cy); text-underline-offset: 2px; overflow-wrap: anywhere; }
+a:hover, a:focus-visible { color: var(--ink); }
+
+code {
+  padding: 1px 5px;
+  border-radius: 4px;
+  background: var(--panel);
+  color: var(--ink);
+  font: 13px/1.5 var(--mono);
+  overflow-wrap: anywhere;
+}
+
+.legal-note {
+  margin: 18px 0;
+  padding: 14px 16px;
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--cy);
+  border-radius: 6px;
+  background: var(--panel);
+}
+.legal-note p:last-child { margin-bottom: 0; }
+
+.legal-foot {
+  margin-top: 48px;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font: 13px/1.6 var(--mono);
+}
+.legal-foot a { color: var(--muted); }
+.legal-foot a:hover { color: var(--cy); }

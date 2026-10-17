@@ -1,0 +1,1386 @@
+{
+  "bundles": {
+    "piper": "/onnx/piper/00f122ffafd7/entry.js",
+    "supertonic3": "/onnx/supertonic3/68eeab0eaeba/entry.js",
+    "kokoro": "/onnx/kokoro/15f6be05d562/entry.js"
+  },
+  "revisions": {
+    "piper": "840e38a7e26d813bd6221b78cfbaefa3585b3f71",
+    "supertonic3": "3cadd1ee6394adea1bd021217a0e650ede09a323",
+    "kokoro": "1939ad2a8e416c0acfeecc08a694d14ef25f2231"
+  },
+  "voices": {
+    "piper": [
+      {
+        "id": "ar_JO-kareem-low",
+        "name": "Kareem",
+        "langs": [
+          "ar-JO"
+        ],
+        "quality": "low",
+        "sizeMB": 63
+      },
+      {
+        "id": "ar_JO-kareem-medium",
+        "name": "Kareem",
+        "langs": [
+          "ar-JO"
+        ],
+        "quality": "medium",
+        "sizeMB": 63
+      },
+      {
+        "id": "ca_ES-upc_ona-medium",
+        "name": "Upc Ona",
+        "langs": [
+          "ca-ES"
+        ],
+        "quality": "medium",
+        "sizeMB": 63
+      },
+      {
+        "id": "ca_ES-upc_ona-x_low",
+        "name": "Upc Ona",
+        "langs": [
+          "ca-ES"
+        ],
+        "quality": "x-low",
+        "sizeMB": 21
+      },
+      {
+        "id": "ca_ES-upc_pau-x_low",
+        "name": "Upc Pau",
+        "langs": [
+          "ca-ES"
+        ],
+        "quality": "x-low",
+        "sizeMB": 28
+      },
+      {
+        "id": "cs_CZ-jirka-low",
+        "name": "Jirka",
+        "langs": [
+          "cs-CZ"
+        ],
+        "quality": "low",
+        "sizeMB": 63
+      },
+      {
+        "id": "cs_CZ-jirka-medium",
+        "name": "Jirka",
+        "langs": [
+          "cs-CZ"
+        ],
+        "quality": "medium",
+        "sizeMB": 63
+      },
+      {
+        "id": "cy_GB-gwryw_gogleddol-medium",
+        "name": "Gwryw Gogleddol",
+        "langs": [
+          "cy-GB"
+        ],
+        "quality": "medium",
+        "sizeMB": 64
+      },
+      {
+        "id": "da_DK-talesyntese-medium",
+        "name": "Talesyntese",
+        "langs": [
+          "da-DK"
+        ],
+        "quality": "medium",
+        "sizeMB": 63
+      },
+      {
+        "id": "de_DE-eva_k-x_low",
+        "name": "Eva K",
+        "langs": [
+          "de-DE"
+        ],
+        "quality": "x-low",
+        "sizeMB": 21
+      },
+      {
+        "id": "de_DE-karlsson-low",
+        "name": "Karlsson",
+        "langs": [
+          "de-DE"
+        ],
+        "quality": "low",
+        "sizeMB": 63
+      },
+      {
+        "id": "de_DE-kerstin-low",
+        "name": "Kerstin",
+        "langs": [
+          "de-DE"
+        ],
+        "quality": "low",
+        "sizeMB": 63
+      },
+      {
+        "id": "de_DE-mls-medium",
+        "name": "Mls",
+        "langs": [
+          "de-DE"
+        ],
+        "quality": "medium",
+        "sizeMB": 77
+      },
+      {
+        "id": "de_DE-pavoque-low",
+        "name": "Pavoque",
+        "langs": [
+          "de-DE"
+        ],
+        "quality": "low",
+        "sizeMB": 63
+      },
+      {
+        "id": "de_DE-ramona-low",
+        "name": "Ramona",
+        "langs": [
+          "de-DE"
+        ],
+        "quality": "low",
+        "sizeMB": 63
+      },
+      {
+        "id": "de_DE-thorsten-high",
+        "name": "Thorsten",
+        "langs": [
+          "de-DE"
+        ],
+        "quality": "high",
+        "sizeMB": 114
+      },
+      {
+        "id": "de_DE-thorsten-low",
+        "name": "Thorsten",
+        "langs": [
+          "de-DE"
+        ],
+        "quality": "low",
+        "sizeMB": 63
+      },
+      {
+        "id": "de_DE-thorsten-medium",
+        "name": "Thorsten",
+        "langs": [
+          "de-DE"
+        ],
+        "quality": "medium",
+        "sizeMB": 63
+      },
+      {
+        "id": "de_DE-thorsten_emotional-medium",
+        "name": "Thorsten Emotional",
+        "langs": [
+          "de-DE"
+        ],
+        "quality": "medium",
+        "sizeMB": 77
+      },
+      {
+        "id": "el_GR-rapunzelina-low",
+        "name": "Rapunzelina",
+        "langs": [
+          "el-GR"
+        ],
+        "quality": "low",
+        "sizeMB": 63
+      },
+      {
+        "id": "en_GB-alan-low",
+        "name": "Alan",
+        "langs": [
+          "en-GB"
+        ],
+        "quality": "low",
+        "sizeMB": 63
+      },
+      {
+        "id": "en_GB-alan-medium",
+        "name": "Alan",
+        "langs": [
+          "en-GB"
+        ],
+        "quality": "medium",
+        "sizeMB": 63
+      },
+      {
+        "id": "en_GB-alba-medium",
+        "name": "Alba",
+        "langs": [
+          "en-GB"
+        ],
+        "quality": "medium",
+        "sizeMB": 63
+      },
+      {
+        "id": "en_GB-aru-medium",
+        "name": "Aru",
+        "langs": [
+          "en-GB"
+        ],
+        "quality": "medium",
+        "sizeMB": 77
+      },
+      {
+        "id": "en_GB-cori-high",
+        "name": "Cori",
+        "langs": [
+          "en-GB"
+        ],
+        "quality": "high",
+        "sizeMB": 114
+      },
+      {
+        "id": "en_GB-cori-medium",
+        "name": "Cori",
+        "langs": [
+          "en-GB"
+        ],
+        "quality": "medium",
+        "sizeMB": 64
+      },
+      {
+        "id": "en_GB-jenny_dioco-medium",
+        "name": "Jenny Dioco",
+        "langs": [
+          "en-GB"
+        ],
+        "quality": "medium",
+        "sizeMB": 63
+      },
+      {
+        "id": "en_GB-northern_english_male-medium",
+        "name": "Northern English Male",
+        "langs": [
+          "en-GB"
+        ],
+        "quality": "medium",
+        "sizeMB": 63
+      },
+      {
+        "id": "en_GB-semaine-medium",
+        "name": "Semaine",
+        "langs": [
+          "en-GB"
+        ],
+        "quality": "medium",
+        "sizeMB": 77
+      },
+      {
+        "id": "en_GB-southern_english_female-low",
+        "name": "Southern English Female",
+        "langs": [
+          "en-GB"
+        ],
+        "quality": "low",
+        "sizeMB": 63
+      },
+      {
+        "id": "en_GB-vctk-medium",
+        "name": "Vctk",
+        "langs": [
+          "en-GB"
+        ],
+        "quality": "medium",
+        "sizeMB": 77
+      },
+      {
+        "id": "en_US-amy-low",
+        "name": "Amy",
+        "langs": [
+          "en-US"
+        ],
+        "quality": "low",
+        "sizeMB": 63
+      },
+      {
+        "id": "en_US-amy-medium",
+        "name": "Amy",
+        "langs": [
+          "en-US"
+        ],
+        "quality": "medium",
+        "sizeMB": 63
+      },
+      {
+        "id": "en_US-arctic-medium",
+        "name": "Arctic",
+        "langs": [
+          "en-US"
+        ],
+        "quality": "medium",
+        "sizeMB": 77
+      },
+      {
+        "id": "en_US-bryce-medium",
+        "name": "Bryce",
+        "langs": [
+          "en-US"
+        ],
+        "quality": "medium",
+        "sizeMB": 64
+      },
+      {
+        "id": "en_US-danny-low",
+        "name": "Danny",
+        "langs": [
+          "en-US"
+        ],
+        "quality": "low",
+        "sizeMB": 63
+      },
+      {
+        "id": "en_US-hfc_female-medium",
+        "name": "Hfc Female",
+        "langs": [
+          "en-US"
+        ],
+        "quality": "medium",
+        "sizeMB": 63
+      },
+      {
+        "id": "en_US-hfc_male-medium",
+        "name": "Hfc Male",
+        "langs": [
+          "en-US"
+        ],
+        "quality": "medium",
+        "sizeMB": 63
+      },
+      {
+        "id": "en_US-joe-medium",
+        "name": "Joe",
+        "langs": [
+          "en-US"
+        ],
+        "quality": "medium",
+        "sizeMB": 63
+      },
+      {
+        "id": "en_US-john-medium",
+        "name": "John",
+        "langs": [
+          "en-US"
+        ],
+        "quality": "medium",
+        "sizeMB": 64
+      },
+      {
+        "id": "en_US-kathleen-low",
+        "name": "Kathleen",
+        "langs": [
+          "en-US"
+        ],
+        "quality": "low",
+        "sizeMB": 63
+      },
+      {
+        "id": "en_US-kristin-medium",
+        "name": "Kristin",
+        "langs": [
+          "en-US"
+        ],
+        "quality": "medium",
+        "sizeMB": 64
+      },
+      {
+        "id": "en_US-kusal-medium",
+        "name": "Kusal",
+        "langs": [
+          "en-US"
+        ],
+        "quality": "medium",
+        "sizeMB": 63
+      },
+      {
+        "id": "en_US-l2arctic-medium",
+        "name": "L2arctic",
+        "langs": [
+          "en-US"
+        ],
+        "quality": "medium",
+        "sizeMB": 77
+      },
+      {
+        "id": "en_US-lessac-high",
+        "name": "Lessac",
+        "langs": [
+          "en-US"
+        ],
+        "quality": "high",
+        "sizeMB": 114
+      },
+      {
+        "id": "en_US-lessac-low",
+        "name": "Lessac",
+        "langs": [
+          "en-US"
+        ],
+        "quality": "low",
+        "sizeMB": 63
+      },
+      {
+        "id": "en_US-lessac-medium",
+        "name": "Lessac",
+        "langs": [
+          "en-US"
+        ],
+        "quality": "medium",
+        "sizeMB": 63
+      },
+      {
+        "id": "en_US-libritts-high",
+        "name": "Libritts",
+        "langs": [
+          "en-US"
+        ],
+        "quality": "high",
+        "sizeMB": 137
+      },
+      {
+        "id": "en_US-libritts_r-medium",
+        "name": "Libritts R",
+        "langs": [
+          "en-US"
+        ],
+        "quality": "medium",
+        "sizeMB": 79
+      },
+      {
+        "id": "en_US-ljspeech-high",
+        "name": "Ljspeech",
+        "langs": [
+          "en-US"
+        ],
+        "quality": "high",
+        "sizeMB": 114
+      },
+      {
+        "id": "en_US-ljspeech-medium",
+        "name": "Ljspeech",
+        "langs": [
+          "en-US"
+        ],
+        "quality": "medium",
+        "sizeMB": 64
+      },
+      {
+        "id": "en_US-norman-medium",
+        "name": "Norman",
+        "langs": [
+          "en-US"
+        ],
+        "quality": "medium",
+        "sizeMB": 64
+      },
+      {
+        "id": "en_US-ryan-high",
+        "name": "Ryan",
+        "langs": [
+          "en-US"
+        ],
+        "quality": "high",
+        "sizeMB": 121
+      },
+      {
+        "id": "en_US-ryan-low",
+        "name": "Ryan",
+        "langs": [
+          "en-US"
+        ],
+        "quality": "low",
+        "sizeMB": 63
+      },
+      {
+        "id": "en_US-ryan-medium",
+        "name": "Ryan",
+        "langs": [
+          "en-US"
+        ],
+        "quality": "medium",
+        "sizeMB": 63
+      },
+      {
+        "id": "es_ES-carlfm-x_low",
+        "name": "Carlfm",
+        "langs": [
+          "es-ES"
+        ],
+        "quality": "x-low",
+        "sizeMB": 28
+      },
+      {
+        "id": "es_ES-davefx-medium",
+        "name": "Davefx",
+        "langs": [
+          "es-ES"
+        ],
+        "quality": "medium",
+        "sizeMB": 63
+      },
+      {
+        "id": "es_ES-mls_10246-low",
+        "name": "Mls 10246",
+        "langs": [
+          "es-ES"
+        ],
+        "quality": "low",
+        "sizeMB": 63
+      },
+      {
+        "id": "es_ES-mls_9972-low",
+        "name": "Mls 9972",
+        "langs": [
+          "es-ES"
+        ],
+        "quality": "low",
+        "sizeMB": 63
+      },
+      {
+        "id": "es_ES-sharvard-medium",
+        "name": "Sharvard",
+        "langs": [
+          "es-ES"
+        ],
+        "quality": "medium",
+        "sizeMB": 77
+      },
+      {
+        "id": "es_MX-ald-medium",
+        "name": "Ald",
+        "langs": [
+          "es-MX"
+        ],
+        "quality": "medium",
+        "sizeMB": 63
+      },
+      {
+        "id": "es_MX-claude-high",
+        "name": "Claude",
+        "langs": [
+          "es-MX"
+        ],
+        "quality": "high",
+        "sizeMB": 63
+      },
+      {
+        "id": "fa_IR-amir-medium",
+        "name": "Amir",
+        "langs": [
+          "fa-IR"
+        ],
+        "quality": "medium",
+        "sizeMB": 64
+      },
+      {
+        "id": "fa_IR-gyro-medium",
+        "name": "Gyro",
+        "langs": [
+          "fa-IR"
+        ],
+        "quality": "medium",
+        "sizeMB": 63
+      },
+      {
+        "id": "fi_FI-harri-low",
+        "name": "Harri",
+        "langs": [
+          "fi-FI"
+        ],
+        "quality": "low",
+        "sizeMB": 70
+      },
+      {
+        "id": "fi_FI-harri-medium",
+        "name": "Harri",
+        "langs": [
+          "fi-FI"
+        ],
+        "quality": "medium",
+        "sizeMB": 63
+      },
+      {
+        "id": "fr_FR-gilles-low",
+        "name": "Gilles",
+        "langs": [
+          "fr-FR"
+        ],
+        "quality": "low",
+        "sizeMB": 63
+      },
+      {
+        "id": "fr_FR-mls-medium",
+        "name": "Mls",
+        "langs": [
+          "fr-FR"
+        ],
+        "quality": "medium",
+        "sizeMB": 77
+      },
+      {
+        "id": "fr_FR-mls_1840-low",
+        "name": "Mls 1840",
+        "langs": [
+          "fr-FR"
+        ],
+        "quality": "low",
+        "sizeMB": 63
+      },
+      {
+        "id": "fr_FR-siwis-low",
+        "name": "Siwis",
+        "langs": [
+          "fr-FR"
+        ],
+        "quality": "low",
+        "sizeMB": 28
+      },
+      {
+        "id": "fr_FR-siwis-medium",
+        "name": "Siwis",
+        "langs": [
+          "fr-FR"
+        ],
+        "quality": "medium",
+        "sizeMB": 63
+      },
+      {
+        "id": "fr_FR-tom-medium",
+        "name": "Tom",
+        "langs": [
+          "fr-FR"
+        ],
+        "quality": "medium",
+        "sizeMB": 64
+      },
+      {
+        "id": "fr_FR-upmc-medium",
+        "name": "Upmc",
+        "langs": [
+          "fr-FR"
+        ],
+        "quality": "medium",
+        "sizeMB": 77
+      },
+      {
+        "id": "hu_HU-anna-medium",
+        "name": "Anna",
+        "langs": [
+          "hu-HU"
+        ],
+        "quality": "medium",
+        "sizeMB": 63
+      },
+      {
+        "id": "hu_HU-berta-medium",
+        "name": "Berta",
+        "langs": [
+          "hu-HU"
+        ],
+        "quality": "medium",
+        "sizeMB": 63
+      },
+      {
+        "id": "hu_HU-imre-medium",
+        "name": "Imre",
+        "langs": [
+          "hu-HU"
+        ],
+        "quality": "medium",
+        "sizeMB": 63
+      },
+      {
+        "id": "is_IS-bui-medium",
+        "name": "Bui",
+        "langs": [
+          "is-IS"
+        ],
+        "quality": "medium",
+        "sizeMB": 76
+      },
+      {
+        "id": "is_IS-salka-medium",
+        "name": "Salka",
+        "langs": [
+          "is-IS"
+        ],
+        "quality": "medium",
+        "sizeMB": 76
+      },
+      {
+        "id": "is_IS-steinn-medium",
+        "name": "Steinn",
+        "langs": [
+          "is-IS"
+        ],
+        "quality": "medium",
+        "sizeMB": 76
+      },
+      {
+        "id": "is_IS-ugla-medium",
+        "name": "Ugla",
+        "langs": [
+          "is-IS"
+        ],
+        "quality": "medium",
+        "sizeMB": 76
+      },
+      {
+        "id": "it_IT-paola-medium",
+        "name": "Paola",
+        "langs": [
+          "it-IT"
+        ],
+        "quality": "medium",
+        "sizeMB": 64
+      },
+      {
+        "id": "it_IT-riccardo-x_low",
+        "name": "Riccardo",
+        "langs": [
+          "it-IT"
+        ],
+        "quality": "x-low",
+        "sizeMB": 28
+      },
+      {
+        "id": "ka_GE-natia-medium",
+        "name": "Natia",
+        "langs": [
+          "ka-GE"
+        ],
+        "quality": "medium",
+        "sizeMB": 63
+      },
+      {
+        "id": "kk_KZ-iseke-x_low",
+        "name": "Iseke",
+        "langs": [
+          "kk-KZ"
+        ],
+        "quality": "x-low",
+        "sizeMB": 28
+      },
+      {
+        "id": "kk_KZ-issai-high",
+        "name": "Issai",
+        "langs": [
+          "kk-KZ"
+        ],
+        "quality": "high",
+        "sizeMB": 128
+      },
+      {
+        "id": "kk_KZ-raya-x_low",
+        "name": "Raya",
+        "langs": [
+          "kk-KZ"
+        ],
+        "quality": "x-low",
+        "sizeMB": 28
+      },
+      {
+        "id": "lb_LU-marylux-medium",
+        "name": "Marylux",
+        "langs": [
+          "lb-LU"
+        ],
+        "quality": "medium",
+        "sizeMB": 63
+      },
+      {
+        "id": "ne_NP-google-medium",
+        "name": "Google",
+        "langs": [
+          "ne-NP"
+        ],
+        "quality": "medium",
+        "sizeMB": 77
+      },
+      {
+        "id": "ne_NP-google-x_low",
+        "name": "Google",
+        "langs": [
+          "ne-NP"
+        ],
+        "quality": "x-low",
+        "sizeMB": 28
+      },
+      {
+        "id": "nl_BE-nathalie-medium",
+        "name": "Nathalie",
+        "langs": [
+          "nl-BE"
+        ],
+        "quality": "medium",
+        "sizeMB": 63
+      },
+      {
+        "id": "nl_BE-nathalie-x_low",
+        "name": "Nathalie",
+        "langs": [
+          "nl-BE"
+        ],
+        "quality": "x-low",
+        "sizeMB": 21
+      },
+      {
+        "id": "nl_BE-rdh-medium",
+        "name": "Rdh",
+        "langs": [
+          "nl-BE"
+        ],
+        "quality": "medium",
+        "sizeMB": 63
+      },
+      {
+        "id": "nl_BE-rdh-x_low",
+        "name": "Rdh",
+        "langs": [
+          "nl-BE"
+        ],
+        "quality": "x-low",
+        "sizeMB": 21
+      },
+      {
+        "id": "nl_NL-mls-medium",
+        "name": "Mls",
+        "langs": [
+          "nl-NL"
+        ],
+        "quality": "medium",
+        "sizeMB": 77
+      },
+      {
+        "id": "nl_NL-mls_5809-low",
+        "name": "Mls 5809",
+        "langs": [
+          "nl-NL"
+        ],
+        "quality": "low",
+        "sizeMB": 63
+      },
+      {
+        "id": "nl_NL-mls_7432-low",
+        "name": "Mls 7432",
+        "langs": [
+          "nl-NL"
+        ],
+        "quality": "low",
+        "sizeMB": 63
+      },
+      {
+        "id": "no_NO-talesyntese-medium",
+        "name": "Talesyntese",
+        "langs": [
+          "no-NO"
+        ],
+        "quality": "medium",
+        "sizeMB": 63
+      },
+      {
+        "id": "pl_PL-darkman-medium",
+        "name": "Darkman",
+        "langs": [
+          "pl-PL"
+        ],
+        "quality": "medium",
+        "sizeMB": 63
+      },
+      {
+        "id": "pl_PL-gosia-medium",
+        "name": "Gosia",
+        "langs": [
+          "pl-PL"
+        ],
+        "quality": "medium",
+        "sizeMB": 63
+      },
+      {
+        "id": "pl_PL-mc_speech-medium",
+        "name": "Mc Speech",
+        "langs": [
+          "pl-PL"
+        ],
+        "quality": "medium",
+        "sizeMB": 63
+      },
+      {
+        "id": "pl_PL-mls_6892-low",
+        "name": "Mls 6892",
+        "langs": [
+          "pl-PL"
+        ],
+        "quality": "low",
+        "sizeMB": 63
+      },
+      {
+        "id": "pt_BR-edresson-low",
+        "name": "Edresson",
+        "langs": [
+          "pt-BR"
+        ],
+        "quality": "low",
+        "sizeMB": 63
+      },
+      {
+        "id": "pt_BR-faber-medium",
+        "name": "Faber",
+        "langs": [
+          "pt-BR"
+        ],
+        "quality": "medium",
+        "sizeMB": 63
+      },
+      {
+        "id": "pt_PT-tugão-medium",
+        "name": "Tugão",
+        "langs": [
+          "pt-PT"
+        ],
+        "quality": "medium",
+        "sizeMB": 63
+      },
+      {
+        "id": "ro_RO-mihai-medium",
+        "name": "Mihai",
+        "langs": [
+          "ro-RO"
+        ],
+        "quality": "medium",
+        "sizeMB": 63
+      },
+      {
+        "id": "ru_RU-denis-medium",
+        "name": "Denis",
+        "langs": [
+          "ru-RU"
+        ],
+        "quality": "medium",
+        "sizeMB": 63
+      },
+      {
+        "id": "ru_RU-dmitri-medium",
+        "name": "Dmitri",
+        "langs": [
+          "ru-RU"
+        ],
+        "quality": "medium",
+        "sizeMB": 63
+      },
+      {
+        "id": "ru_RU-irina-medium",
+        "name": "Irina",
+        "langs": [
+          "ru-RU"
+        ],
+        "quality": "medium",
+        "sizeMB": 63
+      },
+      {
+        "id": "ru_RU-ruslan-medium",
+        "name": "Ruslan",
+        "langs": [
+          "ru-RU"
+        ],
+        "quality": "medium",
+        "sizeMB": 63
+      },
+      {
+        "id": "sk_SK-lili-medium",
+        "name": "Lili",
+        "langs": [
+          "sk-SK"
+        ],
+        "quality": "medium",
+        "sizeMB": 63
+      },
+      {
+        "id": "sl_SI-artur-medium",
+        "name": "Artur",
+        "langs": [
+          "sl-SI"
+        ],
+        "quality": "medium",
+        "sizeMB": 63
+      },
+      {
+        "id": "sr_RS-serbski_institut-medium",
+        "name": "Serbski Institut",
+        "langs": [
+          "sr-RS"
+        ],
+        "quality": "medium",
+        "sizeMB": 77
+      },
+      {
+        "id": "sv_SE-nst-medium",
+        "name": "Nst",
+        "langs": [
+          "sv-SE"
+        ],
+        "quality": "medium",
+        "sizeMB": 63
+      },
+      {
+        "id": "sw_CD-lanfrica-medium",
+        "name": "Lanfrica",
+        "langs": [
+          "sw-CD"
+        ],
+        "quality": "medium",
+        "sizeMB": 63
+      },
+      {
+        "id": "tr_TR-dfki-medium",
+        "name": "Dfki",
+        "langs": [
+          "tr-TR"
+        ],
+        "quality": "medium",
+        "sizeMB": 63
+      },
+      {
+        "id": "tr_TR-fahrettin-medium",
+        "name": "Fahrettin",
+        "langs": [
+          "tr-TR"
+        ],
+        "quality": "medium",
+        "sizeMB": 63
+      },
+      {
+        "id": "tr_TR-fettah-medium",
+        "name": "Fettah",
+        "langs": [
+          "tr-TR"
+        ],
+        "quality": "medium",
+        "sizeMB": 63
+      },
+      {
+        "id": "uk_UA-lada-x_low",
+        "name": "Lada",
+        "langs": [
+          "uk-UA"
+        ],
+        "quality": "x-low",
+        "sizeMB": 21
+      },
+      {
+        "id": "uk_UA-ukrainian_tts-medium",
+        "name": "Ukrainian Tts",
+        "langs": [
+          "uk-UA"
+        ],
+        "quality": "medium",
+        "sizeMB": 77
+      },
+      {
+        "id": "vi_VN-25hours_single-low",
+        "name": "25hours Single",
+        "langs": [
+          "vi-VN"
+        ],
+        "quality": "low",
+        "sizeMB": 63
+      },
+      {
+        "id": "vi_VN-vais1000-medium",
+        "name": "Vais1000",
+        "langs": [
+          "vi-VN"
+        ],
+        "quality": "medium",
+        "sizeMB": 63
+      },
+      {
+        "id": "vi_VN-vivos-x_low",
+        "name": "Vivos",
+        "langs": [
+          "vi-VN"
+        ],
+        "quality": "x-low",
+        "sizeMB": 28
+      },
+      {
+        "id": "zh_CN-huayan-medium",
+        "name": "Huayan",
+        "langs": [
+          "zh-CN"
+        ],
+        "quality": "medium",
+        "sizeMB": 63
+      },
+      {
+        "id": "zh_CN-huayan-x_low",
+        "name": "Huayan",
+        "langs": [
+          "zh-CN"
+        ],
+        "quality": "x-low",
+        "sizeMB": 21
+      }
+    ],
+    "kokoro": [
+      {
+        "id": "af_heart",
+        "name": "Heart",
+        "gender": "female",
+        "langs": [
+          "en-US"
+        ],
+        "quality": "grade A"
+      },
+      {
+        "id": "af_alloy",
+        "name": "Alloy",
+        "gender": "female",
+        "langs": [
+          "en-US"
+        ],
+        "quality": "grade C"
+      },
+      {
+        "id": "af_aoede",
+        "name": "Aoede",
+        "gender": "female",
+        "langs": [
+          "en-US"
+        ],
+        "quality": "grade C+"
+      },
+      {
+        "id": "af_bella",
+        "name": "Bella",
+        "gender": "female",
+        "langs": [
+          "en-US"
+        ],
+        "quality": "grade A-"
+      },
+      {
+        "id": "af_jessica",
+        "name": "Jessica",
+        "gender": "female",
+        "langs": [
+          "en-US"
+        ],
+        "quality": "grade D"
+      },
+      {
+        "id": "af_kore",
+        "name": "Kore",
+        "gender": "female",
+        "langs": [
+          "en-US"
+        ],
+        "quality": "grade C+"
+      },
+      {
+        "id": "af_nicole",
+        "name": "Nicole",
+        "gender": "female",
+        "langs": [
+          "en-US"
+        ],
+        "quality": "grade B-"
+      },
+      {
+        "id": "af_nova",
+        "name": "Nova",
+        "gender": "female",
+        "langs": [
+          "en-US"
+        ],
+        "quality": "grade C"
+      },
+      {
+        "id": "af_river",
+        "name": "River",
+        "gender": "female",
+        "langs": [
+          "en-US"
+        ],
+        "quality": "grade D"
+      },
+      {
+        "id": "af_sarah",
+        "name": "Sarah",
+        "gender": "female",
+        "langs": [
+          "en-US"
+        ],
+        "quality": "grade C+"
+      },
+      {
+        "id": "af_sky",
+        "name": "Sky",
+        "gender": "female",
+        "langs": [
+          "en-US"
+        ],
+        "quality": "grade C-"
+      },
+      {
+        "id": "am_adam",
+        "name": "Adam",
+        "gender": "male",
+        "langs": [
+          "en-US"
+        ],
+        "quality": "grade F+"
+      },
+      {
+        "id": "am_echo",
+        "name": "Echo",
+        "gender": "male",
+        "langs": [
+          "en-US"
+        ],
+        "quality": "grade D"
+      },
+      {
+        "id": "am_eric",
+        "name": "Eric",
+        "gender": "male",
+        "langs": [
+          "en-US"
+        ],
+        "quality": "grade D"
+      },
+      {
+        "id": "am_fenrir",
+        "name": "Fenrir",
+        "gender": "male",
+        "langs": [
+          "en-US"
+        ],
+        "quality": "grade C+"
+      },
+      {
+        "id": "am_liam",
+        "name": "Liam",
+        "gender": "male",
+        "langs": [
+          "en-US"
+        ],
+        "quality": "grade D"
+      },
+      {
+        "id": "am_michael",
+        "name": "Michael",
+        "gender": "male",
+        "langs": [
+          "en-US"
+        ],
+        "quality": "grade C+"
+      },
+      {
+        "id": "am_onyx",
+        "name": "Onyx",
+        "gender": "male",
+        "langs": [
+          "en-US"
+        ],
+        "quality": "grade D"
+      },
+      {
+        "id": "am_puck",
+        "name": "Puck",
+        "gender": "male",
+        "langs": [
+          "en-US"
+        ],
+        "quality": "grade C+"
+      },
+      {
+        "id": "am_santa",
+        "name": "Santa",
+        "gender": "male",
+        "langs": [
+          "en-US"
+        ],
+        "quality": "grade D-"
+      },
+      {
+        "id": "bf_emma",
+        "name": "Emma",
+        "gender": "female",
+        "langs": [
+          "en-GB"
+        ],
+        "quality": "grade B-"
+      },
+      {
+        "id": "bf_isabella",
+        "name": "Isabella",
+        "gender": "female",
+        "langs": [
+          "en-GB"
+        ],
+        "quality": "grade C"
+      },
+      {
+        "id": "bm_george",
+        "name": "George",
+        "gender": "male",
+        "langs": [
+          "en-GB"
+        ],
+        "quality": "grade C"
+      },
+      {
+        "id": "bm_lewis",
+        "name": "Lewis",
+        "gender": "male",
+        "langs": [
+          "en-GB"
+        ],
+        "quality": "grade D+"
+      },
+      {
+        "id": "bf_alice",
+        "name": "Alice",
+        "gender": "female",
+        "langs": [
+          "en-GB"
+        ],
+        "quality": "grade D"
+      },
+      {
+        "id": "bf_lily",
+        "name": "Lily",
+        "gender": "female",
+        "langs": [
+          "en-GB"
+        ],
+        "quality": "grade D"
+      },
+      {
+        "id": "bm_daniel",
+        "name": "Daniel",
+        "gender": "male",
+        "langs": [
+          "en-GB"
+        ],
+        "quality": "grade D"
+      },
+      {
+        "id": "bm_fable",
+        "name": "Fable",
+        "gender": "male",
+        "langs": [
+          "en-GB"
+        ],
+        "quality": "grade C"
+      }
+    ]
+  }
+}

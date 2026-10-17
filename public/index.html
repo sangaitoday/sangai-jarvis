@@ -1,45 +1,193 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#10131c">
-  <link rel="icon" href="data:,">
-  <title>Javis — browser voice chat</title>
-  <link rel="stylesheet" href="/style.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SangAI — Personal AI Assistant &amp; Voice Intelligence</title>
+<meta name="description" content="SangAI is a personal AI assistant and voice agent. Chat and talk with on-device models directly in your browser.">
+<meta name="keywords" content="SangAI, AI assistant, voice AI, speech AI, on-device AI, WebLLM">
+<meta name="author" content="Sang">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#04080e">
+<link rel="icon" href="/icon-192.png">
+<link rel="apple-touch-icon" href="/icon-192.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="SangAI">
+<meta property="og:title" content="SangAI — Personal AI Assistant &amp; Voice Intelligence">
+<meta property="og:description" content="Chat and talk with on-device models directly in your browser with local and browser voice synthesis.">
+<meta property="og:image" content="/sangai-logo.jpg">
+<meta property="og:image:width" content="512">
+<meta property="og:image:height" content="512">
+<meta property="og:image:alt" content="SangAI Logo">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SangAI — Personal AI Assistant &amp; Voice Intelligence">
+<meta name="twitter:description" content="Chat and talk with on-device models directly in your browser with local and browser voice synthesis.">
+<meta name="twitter:image" content="/sangai-logo.jpg">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/talk.css">
+<script type="importmap">
+{
+  "imports": {
+    "onnxruntime-web/wasm": "/onnx/piper/ort/ort.wasm.min.js",
+    "three": "/vendor/three/three.module.min.js",
+    "three/": "/vendor/three/",
+    "three/addons/": "/vendor/three/addons/"
+  }
+}
+</script>
 </head>
 <body>
-  <main class="app">
-    <header>
-      <div class="mark" aria-hidden="true">J</div>
-      <div><p class="eyebrow">SangAI</p><h1>Javis</h1><p class="subtitle">Voice chat on your device</p></div>
-    </header>
-    <section class="setup" aria-label="Conversation settings">
-      <label>Browser model <select id="model"><option value="">Finding models…</option></select></label>
-      <label>Voice <select id="voice"><option value="">Finding voices…</option></select></label>
-      <p class="privacy">Model replies run in this browser. The first use downloads model files. Browser speech recognition and browser voices may use your browser vendor's online service; choose a downloaded voice for on-device output.</p>
-    </section>
-    <section class="conversation" aria-label="Conversation">
-      <div id="lines" class="lines" role="log" aria-live="polite" aria-relevant="additions text">
-        <p class="empty">Choose a model to begin.</p>
+<div class="floor">
+  <canvas id="stage" aria-hidden="true"></canvas>
+  <div class="graph-controls" aria-label="Graph controls">
+    <details id="talk-voice-settings" class="talk-voice-settings">
+      <summary class="talk-control" aria-label="Model & Voices settings">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 8.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7Z"/><path d="m19.4 13.5 1.1.8-1.5 2.6-1.3-.5a7.8 7.8 0 0 1-1.4.8l-.2 1.4h-3l-.2-1.4a7.8 7.8 0 0 1-1.4-.8l-1.3.5-1.5-2.6 1.1-.8a7 7 0 0 1 0-1.6l-1.1-.8 1.5-2.6 1.3.5a7.8 7.8 0 0 1 1.4-.8l.2-1.4h3l.2 1.4a7.8 7.8 0 0 1 1.4.8l1.3-.5 1.5 2.6-1.1.8a7 7 0 0 1 0 1.6Z"/></svg>
+        <span class="talk-control-label">Model & Voices</span>
+      </summary>
+      <div class="talk-voice-menu">
+        <label>Model<select id="talk-model" aria-label="Model"><option value="">Choose a browser model…</option></select></label>
+        <label>Speech engine<select id="talk-tts-engine" aria-label="Speech engine"><option value="browser">Browser voice</option><option value="onnx">ONNX voice</option></select></label>
+        <label>Voice<select id="talk-voice" aria-label="Voice"><option value="">Choose a voice…</option></select></label>
+        <div id="talk-settings-tabs" class="talk-mode-tabs talk-settings-tabs" role="tablist" aria-label="Settings">
+          <button type="button" class="talk-mode-tab" role="tab" id="talk-tab-models" data-tab="models" aria-controls="talk-panel-models" aria-selected="true"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="6" width="12" height="12" rx="2.5"/><path d="M9.5 3v3M14.5 3v3M9.5 18v3M14.5 18v3M3 9.5h3M3 14.5h3M18 9.5h3M18 14.5h3"/></svg><span class="talk-control-label">Models</span></button>
+          <button type="button" class="talk-mode-tab" role="tab" id="talk-tab-voice" data-tab="voice" aria-controls="talk-panel-voice" aria-selected="false" tabindex="-1"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 10v4M8 7v10M12 4v16M16 7v10M20 10v4"/></svg><span class="talk-control-label">Voice</span></button>
+        </div>
+        <div id="talk-panel-models" class="talk-picker talk-models-picker" role="tabpanel" aria-labelledby="talk-tab-models">
+          <h3 class="talk-table-heading"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="5" width="14" height="10" rx="1.5"/><path d="M3 19h18"/></svg>On this device</h3>
+          <span id="talk-model-device" class="talk-picker-note" hidden></span>
+          <div class="talk-table-scroll">
+            <table id="talk-model-table" class="talk-table" role="listbox" aria-label="Models on this device">
+              <thead>
+                <tr>
+                  <th scope="col" id="talk-model-sort-name" class="talk-sortable" tabindex="0" aria-sort="none">Name</th>
+                  <th scope="col" id="talk-model-sort-size" class="talk-sortable" tabindex="0" aria-sort="none">Size</th>
+                  <th scope="col" id="talk-model-sort-speed" class="talk-sortable" tabindex="0" aria-sort="none">Speed</th>
+                  <th scope="col"><span class="talk-sr-only">Action</span></th>
+                </tr>
+              </thead>
+              <tbody id="talk-model-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+        <div id="talk-panel-voice" class="talk-picker talk-voice-picker" role="tabpanel" aria-labelledby="talk-tab-voice" hidden>
+          <div class="talk-picker-header">
+            <input type="search" id="talk-voice-filter" class="talk-table-filter" placeholder="Find" aria-label="Filter voices" autocomplete="off">
+            <div class="talk-voice-tools">
+              <label class="talk-voice-group-control" for="talk-voice-group-by">
+                <span>Group by</span>
+                <select id="talk-voice-group-by" aria-label="Group voices by">
+                  <option value="none">None</option>
+                  <option value="language">Language</option>
+                  <option value="gender">Gender</option>
+                  <option value="country">Country</option>
+                  <option value="provider">Provider</option>
+                </select>
+              </label>
+              <div class="talk-voice-batch-actions">
+                <button type="button" id="talk-voice-download-all" class="talk-download-all-btn" aria-label="Download all matching ONNX voices" title="Download all matching ONNX voices" disabled><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1.5v8m-3-3 3 3 3-3M2.5 11v3h11v-3" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+                <button type="button" id="talk-voice-delete-all" class="talk-download-all-btn talk-delete-btn" aria-label="Delete all matching downloaded ONNX voice models" title="Delete all matching downloaded ONNX voice models" disabled><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 4h11M6 4V2.5h4V4m-6 0 .7 9.5h4.6L10 4M6.5 6.5v4.5m3-4.5v4.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+              </div>
+            </div>
+          </div>
+          <p id="talk-voice-batch-status" class="talk-voice-batch-status" role="status" aria-live="polite"></p>
+          <div id="talk-voice-grid" class="talk-voice-grid">
+            <div id="talk-voice-tbody" class="talk-voice-cards" role="listbox" aria-label="Voices"></div>
+          </div>
+        </div>
       </div>
-      <p id="status" class="status" role="status">Checking this device…</p>
-      <div class="modes" role="group" aria-label="Microphone mode">
-        <button id="push-mode" type="button" aria-pressed="true">Push to talk</button>
-        <button id="handsfree-mode" type="button" aria-pressed="false" disabled>Hands-free</button>
+    </details>
+  </div>
+  <div id="talk-mode" class="talk-mode-tabs" role="radiogroup" aria-label="Conversation mode">
+    <button type="button" class="talk-mode-tab" data-mode="space" role="radio" aria-checked="true">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15a3.5 3.5 0 0 0 3.5-3.5v-5a3.5 3.5 0 1 0-7 0v5A3.5 3.5 0 0 0 12 15Z"/><path d="M18.5 11.5a6.5 6.5 0 0 1-13 0M12 18v3m-3 0h6"/></svg>
+      <span class="talk-control-label">Push-to-talk</span>
+    </button>
+    <button type="button" class="talk-mode-tab" data-mode="handsfree" role="radio" aria-checked="false">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12a8 8 0 0 1 16 0"/><path d="M4 12v5a2 2 0 0 0 2 2h2v-7H6a2 2 0 0 0-2 2Zm16 0v5a2 2 0 0 1-2 2h-2v-7h2a2 2 0 0 1 2 2Z"/></svg>
+      <span class="talk-control-label">Hands-free</span>
+    </button>
+  </div>
+  <section id="talk" aria-label="Talk to SangAI">
+    <div class="talk-center">
+      <div class="talk-reactor">
+        <canvas class="talk-orb-gl" width="520" height="520" aria-hidden="true" hidden></canvas>
+        <canvas class="talk-orb-canvas" width="520" height="520" aria-hidden="true"></canvas>
+        <div class="talk-logo" aria-hidden="true"><img src="/sangai-logo.jpg" alt="SangAI Logo"></div>
+        <div class="talk-call-ripples" aria-hidden="true"><span></span><span></span><span></span></div>
+        <button type="button" id="talk-orb" class="talk-mic" data-icon="mic" data-state="ready" aria-label="Hold to talk">
+          <svg class="i-mic" viewBox="0 0 24 24" aria-hidden="true" width="34" height="34"><path d="M12 15a3.5 3.5 0 0 0 3.5-3.5v-5a3.5 3.5 0 1 0-7 0v5A3.5 3.5 0 0 0 12 15Z"/><path d="M18.5 11.5a.9.9 0 0 0-1.8 0 4.7 4.7 0 0 1-9.4 0 .9.9 0 0 0-1.8 0 6.5 6.5 0 0 0 5.6 6.4V21a.9.9 0 0 0 1.8 0v-3.1a6.5 6.5 0 0 0 5.6-6.4Z"/></svg>
+          <svg class="i-brain" viewBox="0 0 24 24" aria-hidden="true" width="34" height="34"><path d="M12 5.5a3.2 3.2 0 0 0-5.4 2 2.6 2.6 0 0 0-.6 4.6 2.8 2.8 0 0 0 2.2 4.3 2.6 2.6 0 0 0 3.8 1.3z"/><path d="M12 5.5a3.2 3.2 0 0 1 5.4 2 2.6 2.6 0 0 1 .6 4.6 2.8 2.8 0 0 1-2.2 4.3 2.6 2.6 0 0 1-3.8 1.3z"/><path d="M12 5.5v12.2"/><path d="M8.6 9.4c1 .6 2 .7 3.4.4"/><path d="M15.4 12.6c-1 .6-2 .7-3.4.4"/></svg>
+          <svg class="i-speaker" viewBox="0 0 24 24" aria-hidden="true" width="34" height="34"><path d="M4 9v6h3l4 3V6l-4 3H4z"/><path d="M14.5 9a3 3 0 0 1 0 6"/><path d="M17 6.5a7 7 0 0 1 0 11"/></svg>
+        </button>
+        <h1 class="talk-name">SangAI</h1>
       </div>
-      <div class="controls">
-        <button id="mic" class="mic" type="button" disabled>Hold to talk</button>
-        <button id="stop" type="button">Stop reply</button>
+      <form id="talk-form" class="talk-form" hidden>
+        <input id="talk-input" class="talk-input" type="text" autocomplete="off" enterkeyhint="send" aria-label="Message">
+        <button type="submit" id="talk-send" class="talk-send" aria-label="Send">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+        </button>
+      </form>
+    </div>
+    <div id="talk-transcript" class="talk-transcript" role="log" aria-live="polite"></div>
+    <div class="talk-feedback">
+      <p id="talk-status" class="talk-status" role="status"></p>
+    </div>
+  </section>
+  <div id="talk-hold-layer" class="talk-hold-layer">
+    <p id="talk-hold" class="talk-hold">Hold Space to talk with SangAI</p>
+  </div>
+  <footer class="site-footer">
+    <a href="https://github.com/sangaitoday/sangai-javis" target="_blank" rel="noopener noreferrer" aria-label="View SangAI on GitHub">
+      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>
+      <span>View on GitHub</span>
+    </a>
+  </footer>
+  <nav class="site-legal" aria-label="Site links">
+    <a href="/privacy" class="site-legal-link" data-legal="privacy"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M12 3 5 6v6c0 4.5 3 7.5 7 9 4-1.5 7-4.5 7-9V6l-7-3Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Privacy</span></a>
+    <a href="/terms" class="site-legal-link" data-legal="terms"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8l-5-5ZM14 3v5h5M9 13h6M9 17h6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Terms</span></a>
+  </nav>
+  <aside id="legal-panel" class="legal-panel" role="dialog" aria-modal="true" aria-labelledby="legal-panel-title" hidden>
+    <div class="legal-panel-backdrop" data-action="close" aria-hidden="true"></div>
+    <div class="legal-panel-container">
+      <header class="legal-panel-header">
+        <h2 id="legal-panel-title" class="talk-sr-only">Legal Information</h2>
+        <div class="legal-panel-tabs" role="tablist" aria-label="Legal documents">
+          <button type="button" class="legal-panel-tab" role="tab" id="legal-tab-privacy" data-tab="privacy" aria-selected="true">Privacy Policy</button>
+          <button type="button" class="legal-panel-tab" role="tab" id="legal-tab-terms" data-tab="terms" aria-selected="false">Terms of Service</button>
+        </div>
+        <button type="button" class="legal-panel-close" data-action="close" aria-label="Close legal panel">
+          <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </header>
+      <div id="legal-panel-body" class="legal-panel-body" tabindex="0">
+        <div class="legal-panel-loading" hidden>Loading…</div>
+        <div class="legal-panel-content"></div>
       </div>
-      <form id="form"><label class="visually-hidden" for="message">Message</label><input id="message" name="message" placeholder="Or type a message" autocomplete="off"><button type="submit">Send</button></form>
-    </section>
-    <footer>Runs as a static site. No chat API or account is required.</footer>
-  </main>
-  <script src="/talk-models-core.js"></script>
-  <script src="/talk-models.js"></script>
-  <script src="/tts-runtime.js"></script>
-  <script src="/conversation.js"></script>
-  <script src="/app.js"></script>
+      <footer class="legal-panel-footer">
+        <a id="legal-panel-external" href="/privacy" target="_blank" rel="noopener" class="legal-panel-link">Open Privacy page</a>
+      </footer>
+    </div>
+  </aside>
+</div>
+<script src="/home-graph-bg.js"></script>
+<script src="/fake-graph.js"></script>
+<script src="/javis/javis-orb.js"></script>
+<script src="/javis/javis-lattice.js"></script>
+<script src="/javis/javis-reactor3d.js"></script>
+<script src="/javis/javis-orb-scale.js"></script>
+<script src="/javis-center.js"></script>
+<script src="/talk-orb.js"></script>
+<script src="/talk-voice-core.js"></script>
+<script src="/table-sort.js"></script>
+<script src="/talk-models-core.js"></script>
+<script src="/talk-models.js"></script>
+<script src="/talk-tts-catalog.js"></script>
+<script src="/tts-runtime.js"></script>
+<script src="/tts-storage.js"></script>
+<script src="/talk.js"></script>
+<script src="/legal-panel.js"></script>
+<script>JavisGraphBg.create(document.querySelector('.floor'));</script>
 </body>
 </html>
