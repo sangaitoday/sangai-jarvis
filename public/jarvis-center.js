@@ -53,7 +53,8 @@
         const key = i < j ? i + ':' + j : j + ':' + i;
         if (seen.has(key)) continue;
         seen.add(key);
-        edges.push({ a: i, b: j, phase: rnd(), speed: 0.30 + rnd() * 0.55, pulse: rnd() < 0.34 });
+        const color = (edges.length % 3 === 0) ? '#a855f7' : (edges.length % 3 === 1) ? '#34d399' : '#2ddbf0';
+        edges.push({ a: i, b: j, phase: rnd(), speed: 0.30 + rnd() * 0.55, pulse: rnd() < 0.34, color });
       }
     }
     return { nodes, edges, pulses: edges.filter((e) => e.pulse) };
@@ -84,19 +85,35 @@
       ctx.lineTo(gx[e.b], gy[e.b]);
     }
     ctx.stroke();
-    const pr = 1.4 + energy * 1.3;
-    ctx.fillStyle = 'rgba(150,242,255,' + (0.55 + energy * 0.45) + ')';
-    ctx.shadowColor = '#2ddbf0';
-    ctx.shadowBlur = 8 + energy * 9;
+
+    // Vibrant spectral harmonic edge accents (electric violet)
+    ctx.strokeStyle = 'rgba(168,85,247,' + (0.08 + energy * 0.10) + ')';
     ctx.beginPath();
-    for (const e of graph.pulses) {
-      const p = (t * e.speed * (0.6 + energy * 1.5) + e.phase) % 1;
-      const sx = gx[e.a] + (gx[e.b] - gx[e.a]) * p;
-      const sy = gy[e.a] + (gy[e.b] - gy[e.a]) * p;
-      ctx.moveTo(sx + pr, sy);
-      ctx.arc(sx, sy, pr, 0, Math.PI * 2);
+    for (let idx = 0; idx < graph.edges.length; idx += 2) {
+      const e = graph.edges[idx];
+      ctx.moveTo(gx[e.a], gy[e.a]);
+      ctx.lineTo(gx[e.b], gy[e.b]);
     }
-    ctx.fill();
+    ctx.stroke();
+
+    const pr = 1.4 + energy * 1.3;
+    // Multi-spectral pulses: cycling across electric violet, emerald and cyan
+    for (const color of ['#a855f7', '#34d399', '#2ddbf0']) {
+      const list = graph.pulses.filter((e) => (e.color || '#2ddbf0') === color);
+      if (!list.length) continue;
+      ctx.fillStyle = color;
+      ctx.shadowColor = color;
+      ctx.shadowBlur = 8 + energy * 9;
+      ctx.beginPath();
+      for (const e of list) {
+        const p = (t * e.speed * (0.6 + energy * 1.5) + e.phase) % 1;
+        const sx = gx[e.a] + (gx[e.b] - gx[e.a]) * p;
+        const sy = gy[e.a] + (gy[e.b] - gy[e.a]) * p;
+        ctx.moveTo(sx + pr, sy);
+        ctx.arc(sx, sy, pr, 0, Math.PI * 2);
+      }
+      ctx.fill();
+    }
     ctx.fillStyle = 'rgba(45,219,240,' + (0.13 + energy * 0.14) + ')';
     ctx.shadowBlur = 5 + energy * 7;
     ctx.beginPath();

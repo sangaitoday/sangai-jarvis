@@ -54,10 +54,11 @@
   // four sides and vanishes on the outermost, so nothing is pushed through a wall, and it needs no
   // undoing at full size. It does shear the springs, so the mesh is rebuilt while it runs.
   const ORBIT = 0.6;
-  // Cool colours only (greens, cyans, blues, violets), in keeping with the Jarvis orb.
+  // Vibrant Neural Spectrum (greens, emeralds, cyans, blues, electric violets, radiant purples).
   const COLORS = [
     '#2ddbf0', '#7af0ff', '#38bdf8', '#60a5fa', '#818cf8', '#a78bfa', '#c084fc',
     '#4ade80', '#34d399', '#2dd4bf', '#22d3ee', '#86efac', '#67e8f9', '#93c5fd',
+    '#8b5cf6', '#a855f7', '#d946ef', '#6366f1', '#10b981', '#059669',
   ];
   const nodes = [];
   const links = [];
@@ -254,7 +255,13 @@
         const key = i < j ? i * n + j : j * n + i;
         if (seen.has(key)) continue;
         seen.add(key);
-        links.push({ a: i, b: j });
+        links.push({
+          a: i,
+          b: j,
+          speed: 0.25 + (((i * 13 + j * 7) % 10) / 10) * 0.45,
+          phase: ((i * 19 + j * 29) % 100) / 100,
+          color: (links.length % 3 === 0) ? '#a855f7' : (links.length % 3 === 1) ? '#10b981' : '#2ddbf0',
+        });
       }
     }
   }
@@ -411,10 +418,30 @@
   }
 
   function strokeLinks(alpha, keep) {
-    ctx.strokeStyle = `rgba(45, 219, 240, ${alpha.toFixed(3)})`;
+    // Vibrant dual-tone links: blend electric cyan and violet/emerald harmonics
+    const aCyan = alpha * 0.75;
+    const aViolet = alpha * 0.45;
+    
+    // Base cyan layer
+    ctx.strokeStyle = `rgba(45, 219, 240, ${aCyan.toFixed(3)})`;
     ctx.beginPath();
-    for (const link of links) {
-      if (!keep(link)) continue;
+    for (let i = 0; i < links.length; i++) {
+      const link = links[i];
+      if (i % 2 !== 0 || !keep(link)) continue;
+      const a = nodes[link.a];
+      const b = nodes[link.b];
+      if (seam(a, b)) continue;
+      ctx.moveTo(a.sx, a.sy);
+      ctx.lineTo(b.sx, b.sy);
+    }
+    ctx.stroke();
+
+    // Harmonic violet/emerald accent layer
+    ctx.strokeStyle = `rgba(168, 85, 247, ${aViolet.toFixed(3)})`;
+    ctx.beginPath();
+    for (let i = 0; i < links.length; i++) {
+      const link = links[i];
+      if (i % 2 === 0 || !keep(link)) continue;
       const a = nodes[link.a];
       const b = nodes[link.b];
       if (seam(a, b)) continue;
@@ -424,6 +451,29 @@
     ctx.stroke();
   }
 
+  // Traveling data photon pulses along active links
+  function strokePhotons(ts, alpha) {
+    if (calm || alpha < 0.015) return;
+    const pr = 1.6 * (0.65 + 0.35 * scale);
+    ctx.shadowBlur = 6;
+    for (let i = 0; i < links.length; i += 2) {
+      const link = links[i];
+      const a = nodes[link.a];
+      const b = nodes[link.b];
+      if (seam(a, b)) continue;
+      const p = (ts * (link.speed || 0.3) * 0.001 + (link.phase || 0)) % 1;
+      const px = a.sx + (b.sx - a.sx) * p;
+      const py = a.sy + (b.sy - a.sy) * p;
+      const col = link.color || (i % 3 === 0 ? '#a855f7' : i % 3 === 1 ? '#10b981' : '#2ddbf0');
+      ctx.fillStyle = col;
+      ctx.shadowColor = col;
+      ctx.beginPath();
+      ctx.arc(px, py, pr, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    ctx.shadowBlur = 0;
+  }
+
   function draw(ts) {
     ctx.clearRect(0, 0, cw, ch);
     ctx.lineWidth = 1;
@@ -431,9 +481,16 @@
     // Reduced motion: the links sit still at half their peak instead of fading in and out.
     const pulse = calm ? 0.5 : (1 - Math.cos((2 * Math.PI * (ts % LINK_CYCLE_MS)) / LINK_CYCLE_MS)) / 2;
     const touches = (link) => nodes[link.a] === hover || nodes[link.b] === hover;
-    if (pulse > 0.01) strokeLinks(LINK_ALPHA * pulse, (link) => !hover || !touches(link));
+    const linkAlpha = LINK_ALPHA * pulse;
+    if (pulse > 0.01) {
+      strokeLinks(linkAlpha, (link) => !hover || !touches(link));
+      strokePhotons(ts, linkAlpha);
+    }
     // A hovered node's own links stay at the peak, whatever the cycle is doing.
-    if (hover) strokeLinks(LINK_ALPHA, touches);
+    if (hover) {
+      strokeLinks(LINK_ALPHA * 1.5, touches);
+      strokePhotons(ts, LINK_ALPHA * 1.5);
+    }
     for (const a of nodes) {
       const hot = hover === a;
       // Smaller as the field gathers, so the core stays a glow and not a white blot.
@@ -441,8 +498,18 @@
       if (hot) {
         ctx.strokeStyle = a.color;
         ctx.lineWidth = 2;
+        ctx.shadowColor = a.color;
+        ctx.shadowBlur = 10;
         ctx.beginPath();
         ctx.arc(a.sx, a.sy, rad + 5, 0, Math.PI * 2);
+        ctx.stroke();
+        ctx.shadowBlur = 0;
+      } else if (a.r > 1.7) {
+        // Subtle ambient aura for larger/central nodes
+        ctx.strokeStyle = a.color;
+        ctx.lineWidth = 0.6;
+        ctx.beginPath();
+        ctx.arc(a.sx, a.sy, rad + 2.5, 0, Math.PI * 2);
         ctx.stroke();
       }
       ctx.fillStyle = a.color;

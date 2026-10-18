@@ -128,18 +128,21 @@
     float core  = exp(-r * (2.5 - swell * 0.5));
     float field = core * (0.55 + n * 0.85);
 
-    // ONE HUE FAMILY. The whole HUD is cyan-blue, and the earlier amber/green
-    // split for these two states fought that rather than belonging to it — so
-    // thinking and speaking now differ by ENERGY, not by colour.
-    vec3 deep  = vec3(0.10, 0.45, 0.80);   // cool blue, thinking
-    vec3 bright = vec3(0.25, 0.80, 0.98);  // brighter cyan, speaking
-    vec3 tint  = mix(deep, bright, uState * 0.65 + swell * 0.35);
+    // VIBRANT NEURAL SPECTRUM — distinct chromatic harmonic depth.
+    // Deep electric violet harmonic blending into radiant cyan core, with vivid emerald
+    // resonance rim waves responding to voice amplitude and energy.
+    vec3 violetBase = vec3(0.42, 0.16, 0.88);  // deep electric violet harmonic
+    vec3 cyanCore   = vec3(0.12, 0.76, 0.98);  // radiant cyan core
+    vec3 emeraldRim = vec3(0.16, 0.94, 0.62);  // chromatic emerald resonance
+
+    vec3 baseTint = mix(violetBase, cyanCore, clamp(uState * 0.70 + swell * 0.30 + 0.20, 0.0, 1.0));
+    vec3 tint = mix(baseTint, emeraldRim, swell * 0.45);
 
     vec3 col = tint * field;
-    // A slow expanding pulse, only while speaking — the field's own echo of the
-    // voice, under the graph rather than on it.
-    col += tint * pow(max(0.0, 1.0 - abs(r - fract(uTime * 0.45) * 1.1) * 6.0), 2.0)
-                * swell * 0.35;
+    // Chromatic harmonic ripple waves under the graph
+    float waveDist = abs(r - fract(uTime * 0.42) * 1.15);
+    vec3 waveColor = mix(emeraldRim, violetBase, sin(uTime * 1.5 + r * 4.0) * 0.5 + 0.5);
+    col += waveColor * pow(max(0.0, 1.0 - waveDist * 5.5), 2.0) * (0.15 + swell * 0.40);
 
     // Alpha, not black: this canvas sits over the panel's grid background, and
     // an opaque quad would punch a hole in it. Capped well under 1 so the grid
