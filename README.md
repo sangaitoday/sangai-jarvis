@@ -1,14 +1,14 @@
-# SangAI Javis
+# SangAI Jarvis
 
-SangAI Javis is the open-source, on-device voice and conversational assistant from SangAI. It delivers the full interactive voice interface — featuring a reactive 2D/3D orb, real-time push-to-talk speech recognition, and low-latency voice synthesis — running **100% locally in your browser**.
+SangAI Jarvis is the open-source, on-device voice and conversational assistant from SangAI. It delivers the full interactive voice interface — featuring a reactive 2D/3D orb, real-time push-to-talk speech recognition, and low-latency voice synthesis — running **100% locally in your browser**.
 
 All neural language models run on-device via **WebGPU** ([WebLLM](https://webllm.mlc.ai/)), and all neural speech synthesis models run locally via **WebAssembly and WebGPU ONNX** (Piper, Supertonic 3, Kokoro). No cloud model APIs, external backend proxies, API keys, or server `.env` secrets are required.
 
 ## Preview
 
-[Open the live SangAI Javis demo](https://www.sangai.today/).
+[Open the live SangAI Jarvis demo](https://www.sangai.today/).
 
-[![SangAI website with the Javis voice orb, push-to-talk controls, and navigation](assets/screenshots/sangai-live-demo.png)](https://www.sangai.today/)
+[![SangAI website with the Jarvis voice orb, push-to-talk controls, and navigation](assets/screenshots/sangai-live-demo.png)](https://www.sangai.today/)
 
 ---
 
@@ -27,8 +27,8 @@ All neural language models run on-device via **WebGPU** ([WebLLM](https://webllm
 
 ```sh
 # Clone the repository
-git clone https://github.com/sangaitoday/sangai-javis.git
-cd sangai-javis
+git clone https://github.com/sangaitoday/sangai-jarvis.git
+cd sangai-jarvis
 
 # Install dependencies
 npm install
@@ -70,7 +70,7 @@ Open your browser and navigate to <http://127.0.0.1:8080>.
 
 ## Running with HTTPS / Mobile Devices
 
-Microphone permissions in Web browsers require a **secure context** (`http://localhost` or HTTPS). If you want to access your Javis instance from your phone or across the network, expose the server over HTTPS using a lightweight tunnel such as Cloudflare Tunnel:
+Microphone permissions in Web browsers require a **secure context** (`http://localhost` or HTTPS). If you want to access your Jarvis instance from your phone or across the network, expose the server over HTTPS using a lightweight tunnel such as Cloudflare Tunnel:
 
 ```sh
 cloudflared tunnel --url http://127.0.0.1:8080
@@ -111,10 +111,10 @@ cloudflared tunnel --url http://127.0.0.1:8080
 
 **SangAI** is an autonomous, open-source AI platform and personal agent architecture developed by **Sang** ([sang@sangai.today](mailto:sang@sangai.today)).
 
-- **Repository**: [github.com/sangaitoday/sangai-javis](https://github.com/sangaitoday/sangai-javis)
+- **Repository**: [github.com/sangaitoday/sangai-jarvis](https://github.com/sangaitoday/sangai-jarvis)
 - **Contact & Inquiries**: [sang@sangai.today](mailto:sang@sangai.today)
 
-If you find a bug, have a feature request, or wish to contribute, please [open an issue](https://github.com/sangaitoday/sangai-javis/issues) on GitHub or contact Sang directly.
+If you find a bug, have a feature request, or wish to contribute, please [open an issue](https://github.com/sangaitoday/sangai-jarvis/issues) on GitHub or contact Sang directly.
 
 ---
 

@@ -54,7 +54,7 @@
   // four sides and vanishes on the outermost, so nothing is pushed through a wall, and it needs no
   // undoing at full size. It does shear the springs, so the mesh is rebuilt while it runs.
   const ORBIT = 0.6;
-  // Cool colours only (greens, cyans, blues, violets), in keeping with the Javis orb.
+  // Cool colours only (greens, cyans, blues, violets), in keeping with the Jarvis orb.
   const COLORS = [
     '#2ddbf0', '#7af0ff', '#38bdf8', '#60a5fa', '#818cf8', '#a78bfa', '#c084fc',
     '#4ade80', '#34d399', '#2dd4bf', '#22d3ee', '#86efac', '#67e8f9', '#93c5fd',

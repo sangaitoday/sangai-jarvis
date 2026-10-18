@@ -18,10 +18,10 @@
   }
 
   function createTalkOrb(canvas, glCanvas, env = {
-    reactor3d: window.SangaiJavisReactor3D,
+    reactor3d: window.SangaiJarvisReactor3D,
     reactor2d: window.SangaiTalkReactor,
-    scale: window.SangaiJavisOrbScale,
-    lattice: window.SangaiJavisLattice,
+    scale: window.SangaiJarvisOrbScale,
+    lattice: window.SangaiJarvisLattice,
     now: () => performance.now(),
     hints: () => ({
       coarse: typeof window.matchMedia === 'function' && window.matchMedia('(pointer: coarse)').matches,

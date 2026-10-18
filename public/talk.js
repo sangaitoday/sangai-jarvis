@@ -1,5 +1,5 @@
 'use strict';
-// Center Javis. Five states shown on the orb. Space holds the mic.
+// Center Jarvis. Five states shown on the orb. Space holds the mic.
 // Hands-free keeps it armed (Wake) until a phrase arrives.
 (function () {
   const root = document.getElementById('talk');
@@ -1218,7 +1218,7 @@
     const demo = core.previewSpeechText(ttsEngine === 'onnx' ? onnxLang : selectedBrowserVoice?.lang);
     speaking = true;
     paint('speaking');
-    status.textContent = 'Javis is previewing this voice…';
+    status.textContent = 'Jarvis is previewing this voice…';
     try {
       if (ttsEngine === 'onnx') await speakOnnxThenBrowser(demo, generation);
       else {

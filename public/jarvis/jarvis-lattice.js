@@ -1,10 +1,10 @@
 'use strict';
-// javis-lattice.js — the pure arithmetic behind the 3D reactor: where the
+// jarvis-lattice.js — the pure arithmetic behind the 3D reactor: where the
 // nodes sit on the sphere, which of them are wired together, and how much energy
 // each state is carrying.
 //
-// WHY THIS IS ITS OWN FILE AND NOT PART OF javis-reactor3d.js
-// The same reason javis-viseme.js is split out of javis-avatar.js, and it is worth
+// WHY THIS IS ITS OWN FILE AND NOT PART OF jarvis-reactor3d.js
+// The same reason jarvis-viseme.js is split out of jarvis-avatar.js, and it is worth
 // restating rather than cross-referencing: everything here is arithmetic on numbers.
 // No DOM, no WebGL, no three.js, no audio API. That makes it the one part of the
 // reactor `node:test` can cover COMPLETELY, with no fake renderer and no module
@@ -12,7 +12,7 @@
 // anything that can live here should.
 //
 // WHAT THIS REPLACES
-// javis.js's `GRAPH` block built the same idea on a FLAT ANNULUS: 16 concentric
+// jarvis.js's `GRAPH` block built the same idea on a FLAT ANNULUS: 16 concentric
 // rings between 0.36R and 0.92R, `count ∝ r` so areal density stayed even, and a
 // hole in the middle because the 96px mic button sits inside the ring. That code is
 // still there and still correct — it is the 2D fallback. This file is the sphere.
@@ -32,7 +32,7 @@
   // ---------------------------------------------------------------------------
 
   // Deterministic PRNG, same LCG and same seed as the 2D graph. A fixed TOPOLOGY is
-  // what makes this read as "Javis's brain" rather than a random scatter; the
+  // what makes this read as "Jarvis's brain" rather than a random scatter; the
   // POSITIONS still move, via the per-node drift below.
   function lcg(seed) {
     let s = seed >>> 0;
@@ -129,7 +129,7 @@
 
   // Unit-sphere position of a node at rest. Used for wiring (which happens once, on
   // the resting layout) and by the tests. The renderer computes the ANIMATED version
-  // of this in its vertex shader — see javis-reactor3d.js's NODE_POSITION glsl,
+  // of this in its vertex shader — see jarvis-reactor3d.js's NODE_POSITION glsl,
   // which is this same formula with the sway terms added.
   function restPosition(n) {
     const sp = Math.sin(n.ph);
@@ -241,7 +241,7 @@
 
   // Per-state weights. Every one of these is a 0..1 dial the shaders multiply by, so
   // a state change can be EASED rather than switched — the same reasoning as
-  // javis-orb.js's lerped `uState`: a morph is a visible transition, a switch is a
+  // jarvis-orb.js's lerped `uState`: a morph is a visible transition, a switch is a
   // jump cut.
   //
   //   graph   how present the mesh, its edges and its pulses are
@@ -268,7 +268,7 @@
   const STATES = Object.keys(STATE);
 
   // Energy — 0..1, and the single number that decides how alive the sphere looks.
-  // Lifted verbatim from javis.js's drawOrb so the two renderers agree:
+  // Lifted verbatim from jarvis.js's drawOrb so the two renderers agree:
   //   speaking  the REAL reply amplitude, which is what makes the state "brain and
   //             audio" rather than the same loop in a new colour
   //   thinking  two beats, a slow swell with a faster one riding on it. A single sine
@@ -281,9 +281,9 @@
     return Math.min(1, lv);
   }
 
-  // The eased dial set. javis-reactor3d.js holds one of these and advances it every
-  // frame; the shaders read the result. `k` is the same 0.08 both javis-orb.js and
-  // javis-avatar.js use for their morphs, so all three settle at the same rate and a
+  // The eased dial set. jarvis-reactor3d.js holds one of these and advances it every
+  // frame; the shaders read the result. `k` is the same 0.08 both jarvis-orb.js and
+  // jarvis-avatar.js use for their morphs, so all three settle at the same rate and a
   // state change looks like one movement rather than three.
   function createMixer(initial = 'ready') {
     const now = { ...STATE[initial] || STATE.ready };
@@ -316,7 +316,7 @@
   // which is what takes the per-frame CPU cost from an 830-iteration loop to two
   // uniform writes.
   //
-  // Attribute names are the contract with javis-reactor3d.js's GLSL; they are
+  // Attribute names are the contract with jarvis-reactor3d.js's GLSL; they are
   // asserted in the tests so a rename cannot silently produce an empty sphere.
   function packNodes(graph) {
     const n = graph.nodes.length;
@@ -430,5 +430,5 @@
   // Dual tail, same as every other file here: CommonJS for node:test, a global for
   // the browser, and no module system in between.
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
-  if (typeof window !== 'undefined') window.SangaiJavisLattice = api;
+  if (typeof window !== 'undefined') window.SangaiJarvisLattice = api;
 })();

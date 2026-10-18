@@ -1,15 +1,15 @@
 'use strict';
-// javis-reactor3d.js — the reactor as a real 3D scene: ~830 nodes on a rotating
+// jarvis-reactor3d.js — the reactor as a real 3D scene: ~830 nodes on a rotating
 // sphere shell, wired into a mesh, with signals travelling along the edges.
 //
 // WHAT THIS REPLACES, AND WHAT IT DOES NOT
-// javis.js's drawOrb() draws all five states as line work on a flat 2D canvas, with
-// javis-orb.js's noise field crossfaded in behind the two working states. That code
+// jarvis.js's drawOrb() draws all five states as line work on a flat 2D canvas, with
+// jarvis-orb.js's noise field crossfaded in behind the two working states. That code
 // is UNCHANGED and still shipping — it is the fallback, and on a machine without
 // WebGL2 or on a software renderer it is the whole panel. This file is tier 1.
 //
-// WHY THIS ONE DOES USE THREE.JS WHEN javis-orb.js ARGUES AGAINST IT
-// javis-orb.js's argument is that a full-screen noise field is a fragment-shader
+// WHY THIS ONE DOES USE THREE.JS WHEN jarvis-orb.js ARGUES AGAINST IT
+// jarvis-orb.js's argument is that a full-screen noise field is a fragment-shader
 // effect needing no scene graph, no camera and no mesh. That is still true, and this
 // file proves it by rendering that very shader, unchanged, as its own backdrop. What
 // is NOT true of a sphere of 830 depth-sorted points, a thousand line segments and a
@@ -18,33 +18,33 @@
 //
 // WHY IT TAKES OVER #orb-gl RATHER THAN ADDING A CANVAS
 // The page already holds two WebGL contexts (this one and the avatar's). Browsers
-// evict the oldest when a page holds too many — see javis-orb.js's note on context
+// evict the oldest when a page holds too many — see jarvis-orb.js's note on context
 // loss, which exists because the avatar made that a real failure mode rather than a
 // theoretical one. So the 3D reactor claims the canvas the shader orb used to own,
 // and the context count is exactly what it was before.
 //
 // WHY THE CALLER CREATES THE CONTEXT AND PASSES IT IN (opts.gl)
 // The fallback needs a USABLE #orb-gl: once three.js has made a context there, that
-// canvas is spent and javis-orb.js can no longer have it. The obvious fix — probe
+// canvas is spent and jarvis-orb.js can no longer have it. The obvious fix — probe
 // support on a scratch 1x1 canvas and throw it away — is wrong, because during that
 // probe the page transiently holds THREE contexts, which is the exact condition that
 // makes a browser evict the oldest. Evicting #orb-gl while deciding whether to use
 // #orb-gl is a bug that would appear only under memory pressure, on someone else's
 // machine.
-// So javis.js creates exactly one context, inspects it, and hands the same object to
+// So jarvis.js creates exactly one context, inspects it, and hands the same object to
 // whichever consumer wins — this module via opts.gl, or createOrb via its own opts.gl.
 // The count never exceeds what the page held before, not even for a frame.
 //
 // `ok:false` IS A NORMAL OUTCOME, NEVER AN ERROR TO REPORT
 // No WebGL2, no import maps, a software rasteriser, a failed import, a lost context.
-// In every one of those cases javis.js keeps its 2D reactor and the user sees a
+// In every one of those cases jarvis.js keeps its 2D reactor and the user sees a
 // plainer animation rather than a broken panel. Nothing here is ever allowed to throw
 // into the caller.
 
 (() => {
   // Software rasterisers report as WebGL and then run at a few frames per second,
   // which looks broken rather than plain. Same list, and the same reasoning, as
-  // javis-avatar.js — SwiftShader is what Chrome falls back to over RDP or with a
+  // jarvis-avatar.js — SwiftShader is what Chrome falls back to over RDP or with a
   // blocklisted GPU, llvmpipe/softpipe are the Mesa equivalents. That matters more
   // here than for the avatar: this host's own desktop is reached over RDP.
   const SOFTWARE = /swiftshader|llvmpipe|softpipe|software|basic render|microsoft basic/i;
@@ -62,17 +62,17 @@
   const TAU = Math.PI * 2;
   const clamp01 = (n) => Math.max(0, Math.min(1, Number(n) || 0));
 
-  const model = () => (typeof window !== 'undefined' && window.SangaiJavisLattice)
-    || (typeof require === 'function' ? require('./javis-lattice.js') : null);
-  const orb = () => (typeof window !== 'undefined' && window.SangaiJavisOrb)
-    || (typeof require === 'function' ? require('./javis-orb.js') : null);
+  const model = () => (typeof window !== 'undefined' && window.SangaiJarvisLattice)
+    || (typeof require === 'function' ? require('./jarvis-lattice.js') : null);
+  const orb = () => (typeof window !== 'undefined' && window.SangaiJarvisOrb)
+    || (typeof require === 'function' ? require('./jarvis-orb.js') : null);
 
   // ---------------------------------------------------------------------------
   // GLSL
   // ---------------------------------------------------------------------------
 
   // The animation, and the reason the per-frame CPU cost is two uniform writes rather
-  // than an 830-iteration loop. This is javis-lattice.js's restPosition() with
+  // than an 830-iteration loop. This is jarvis-lattice.js's restPosition() with
   // the sway terms added — the model computes the resting layout for wiring, the GPU
   // computes where it actually is this frame.
   //
@@ -167,7 +167,7 @@
   out vec4 outColor;
   void main() { outColor = vec4(vTint, vAlpha); }`;
 
-  // ⚠ THE ONE THING THAT CANNOT BE SHARED VERBATIM. javis-orb.js's shader is written
+  // ⚠ THE ONE THING THAT CANNOT BE SHARED VERBATIM. jarvis-orb.js's shader is written
   // for raw WebGL, so it opens with its own `#version 300 es`. three.js's
   // RawShaderMaterial with glslVersion: GLSL3 PREPENDS that same directive, and GLSL
   // requires #version to be the first non-comment token — so the reused source arrives
@@ -178,7 +178,7 @@
   // simply has no energy field behind it. Nothing throws.
   //
   // Stripping the caller's copy is the fix, and it belongs HERE rather than in
-  // javis-orb.js: that file's own raw-GL path still needs the directive, and it is the
+  // jarvis-orb.js: that file's own raw-GL path still needs the directive, and it is the
   // one that has to keep working when this one cannot run at all.
   const forThree = (src) => String(src).replace(/^\s*#version[^\n]*\n/, '');
 
@@ -213,7 +213,7 @@
     // not a GL context at all — check for the API rather than trusting the object.
     if (!gl || typeof gl.getParameter !== 'function') return 'no-webgl';
     if (typeof console !== 'undefined' && !supportsModules()) {
-      console.info('[javis-reactor3d] HTMLScriptElement.supports("importmap") says no, but attempting the 3D reactor anyway — the real test is whether `import(\'three\')` resolves');
+      console.info('[jarvis-reactor3d] HTMLScriptElement.supports("importmap") says no, but attempting the 3D reactor anyway — the real test is whether `import(\'three\')` resolves');
     }
     try {
       const dbg = gl.getExtension && gl.getExtension('WEBGL_debug_renderer_info');
@@ -223,7 +223,7 @@
         // apart from the import-map case above, and the two have different fixes
         // (one is the browser, one is the machine's GPU/driver path).
         if (typeof console !== 'undefined') {
-          console.info(`[javis-reactor3d] software renderer detected (${name}) — using the 2D reactor`);
+          console.info(`[jarvis-reactor3d] software renderer detected (${name}) — using the 2D reactor`);
         }
         return 'unsupported';
       }
@@ -266,14 +266,14 @@
   //                   ESM: a bare `three` specifier cannot resolve under node:test.
   //   opts.probe      TEST SEAM for the support answer.
   //   opts.density    node budget — halved on small screens by the caller
-  //   opts.multiplier node budget as a multiple of the ~830 default (javis-lattice.js)
+  //   opts.multiplier node budget as a multiple of the ~830 default (jarvis-lattice.js)
   //   opts.look       { nodeSize, nodeLit, edgeAlpha } gains on the default look, each 1;
   //                   setLook() changes them later
   //   opts.maxDpr     device-pixel-ratio cap
   //   opts.camDist    camera distance; the shell has radius 1
   //
   // The handle comes back immediately with `ok:false` and becomes live when three.js
-  // lands, so javis.js's rAF loop can call draw() from the very first frame and simply
+  // lands, so jarvis.js's rAF loop can call draw() from the very first frame and simply
   // see nothing happen until then. Same contract as createAvatar, for the same reason.
   function createReactor(canvas, opts = {}) {
     if (!canvas || typeof canvas.getContext !== 'function') return dead('no-canvas');
@@ -305,7 +305,7 @@
     let ok = false, reason = 'loading', disposed = false, lost = false;
     const gain = (k, look = opts.look, dflt = 1) => (Number(look?.[k]) > 0 ? Number(look[k]) : dflt);
 
-    // Latched inputs — javis.js drives these from frame one, long before the scene
+    // Latched inputs — jarvis.js drives these from frame one, long before the scene
     // exists, so they are recorded and applied on the first draw after it lands.
     const mixer = M.createMixer('ready');
     let state = 'ready';
@@ -321,7 +321,7 @@
       // dispose() releases this renderer's GPU resources. Do NOT call
       // forceContextLoss(): it intentionally loses the canvas context, and Chrome can
       // then refuse to create another renderer on that same canvas — the same trap
-      // javis-avatar.js records.
+      // jarvis-avatar.js records.
       try { renderer?.dispose(); } catch { /* context already gone */ }
       renderer = null; scene = null; camera = null; bgScene = null; bgCam = null;
     }
@@ -329,12 +329,12 @@
     const onLost = (e) => {
       e?.preventDefault?.();   // without this the context can never be restored
       lost = true; ok = false; reason = 'context-lost';
-      if (typeof console !== 'undefined') console.warn('[javis-reactor3d] WebGL context lost');
+      if (typeof console !== 'undefined') console.warn('[jarvis-reactor3d] WebGL context lost');
     };
     canvas.addEventListener?.('webglcontextlost', onLost, false);
 
     // Not visible = not rendered. offsetParent is the one that matters: the page
-    // HIDES #javis-panel when you switch service and never unmounts it, so without
+    // HIDES #jarvis-panel when you switch service and never unmounts it, so without
     // this the sphere renders off-screen forever.
     function hidden() {
       if (typeof document !== 'undefined' && document.hidden) return true;
@@ -359,7 +359,7 @@
     //
     // frustumCulled = false is MANDATORY here, not defensive. Everything in this scene
     // is positioned in the vertex shader, so three.js's culling test measures bounds the
-    // geometry never actually occupies — javis-avatar.js:298 turns it off on the VRM's
+    // geometry never actually occupies — jarvis-avatar.js:298 turns it off on the VRM's
     // spring-bone meshes for exactly the same reason. The symptom when it is missing is
     // the classic one: the object vanishes as the camera nears it or a resize narrows
     // the frustum, with nothing in the console to say why.
@@ -368,7 +368,7 @@
     function makeMaterial(THREE, vert, frag, extra = {}) {
       // RawShaderMaterial, not ShaderMaterial: ShaderMaterial prepends three.js's own
       // uniform/attribute prelude, which collides with GLSL3 sources that declare
-      // their own — including javis-orb.js's backdrop, which is already written as
+      // their own — including jarvis-orb.js's backdrop, which is already written as
       // `#version 300 es`.
       const m = new THREE.RawShaderMaterial({
         glslVersion: THREE.GLSL3,
@@ -581,7 +581,7 @@
       show(ring);
     }
 
-    // javis-orb.js's field, unchanged, on a full-screen quad. It renders into its own
+    // jarvis-orb.js's field, unchanged, on a full-screen quad. It renders into its own
     // scene with an orthographic camera and goes down first, so it is a backdrop in
     // the literal sense — nothing in the main scene has to know it exists.
     function buildBackdrop() {
@@ -618,7 +618,7 @@
       if (!renderer || !camera) return;
       const w = canvas.width, h = canvas.height;
       if (!w || !h) return;
-      // `false` — javis.js's own fit() owns the backing store and the CSS size;
+      // `false` — jarvis.js's own fit() owns the backing store and the CSS size;
       // letting three.js also write style here would fight it on every resize.
       renderer.setSize?.(w, h, false);
       camera.aspect = aspect();
@@ -635,7 +635,7 @@
       try {
         mod = await load();
       } catch (err) {
-        if (typeof console !== 'undefined') console.warn('[javis-reactor3d] library failed to load:', err?.message || err);
+        if (typeof console !== 'undefined') console.warn('[jarvis-reactor3d] library failed to load:', err?.message || err);
         return fail('no-library');
       }
       if (disposed) return fail('disposed');
@@ -644,7 +644,7 @@
 
       try {
         // `context` is what keeps the one-context rule structural rather than a
-        // convention: three.js adopts the object javis.js already made instead of
+        // convention: three.js adopts the object jarvis.js already made instead of
         // asking the canvas for another. premultipliedAlpha must MATCH the flags that
         // context was created with — three picks different blend factors for
         // AdditiveBlending depending on it, and a mismatch shows up as a field that is
@@ -654,12 +654,12 @@
           alpha: true, antialias: true, premultipliedAlpha: false,
         });
       } catch (err) {
-        if (typeof console !== 'undefined') console.warn('[javis-reactor3d] no WebGL:', err?.message || err);
+        if (typeof console !== 'undefined') console.warn('[jarvis-reactor3d] no WebGL:', err?.message || err);
         return fail('no-webgl');
       }
 
       try {
-        // setPixelRatio(1) is deliberate and load-bearing: javis.js's fit() has ALREADY
+        // setPixelRatio(1) is deliberate and load-bearing: jarvis.js's fit() has ALREADY
         // multiplied the backing store by devicePixelRatio, and setSize is handed that
         // same already-scaled width. Letting three scale again would render at up to
         // DPR^2 the pixels for no visible gain.
@@ -671,7 +671,7 @@
         buildScene();
         resize();
       } catch (err) {
-        if (typeof console !== 'undefined') console.warn('[javis-reactor3d] scene failed to build:', err?.message || err);
+        if (typeof console !== 'undefined') console.warn('[jarvis-reactor3d] scene failed to build:', err?.message || err);
         return fail('scene-failed');
       }
 
@@ -777,7 +777,7 @@
         if (bgMat) bgMat.uniforms.uState.value = state === 'speaking' ? 1 : 0;
         // The field's own fade. It used to be a CSS opacity on #orb-gl, but in tier 1
         // the backdrop and the subject share one canvas, so CSS can no longer reach one
-        // without the other — see javis-orb.js's uBackdrop.
+        // without the other — see jarvis-orb.js's uBackdrop.
         U.uBackdrop.value = dials.glow;
 
         updateSpokes(dials);
@@ -793,9 +793,9 @@
           renderer.render(scene, camera);
           drawn++;
         } catch (err) {
-          // One bad frame must not take the panel down with it — javis.js falls back
+          // One bad frame must not take the panel down with it — jarvis.js falls back
           // to the 2D reactor the moment `ok` goes false.
-          if (typeof console !== 'undefined') console.warn('[javis-reactor3d] draw failed:', err?.message || err);
+          if (typeof console !== 'undefined') console.warn('[jarvis-reactor3d] draw failed:', err?.message || err);
           ok = false; reason = 'draw-failed';
         }
       },
@@ -820,5 +820,5 @@
 
   // Dual tail, same as every other file here.
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
-  if (typeof window !== 'undefined') window.SangaiJavisReactor3D = api;
+  if (typeof window !== 'undefined') window.SangaiJarvisReactor3D = api;
 })();

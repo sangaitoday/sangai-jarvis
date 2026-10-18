@@ -9,7 +9,7 @@
 // Both layers sit UNDER the transparent graph canvas (pointer-events:none).
 // Destroyed with each home-panel remount so a stale rAF never paints a detached stage.
 (function () {
-  const STORAGE_KEY = 'javis_graph_bg';
+  const STORAGE_KEY = 'jarvis_graph_bg';
   const MODES = ['galaxy', 'video', 'mixed'];
   const VIDEO_SRC = '/media/home-graph-bg.mp4';
   const MODE_LABEL = { galaxy: 'Galaxy', video: 'Video', mixed: 'Mixed' };
@@ -574,5 +574,5 @@
     };
   }
 
-  window.JavisGraphBg = { create, readMode, MODES, MODE_LABEL, STORAGE_KEY };
+  window.JarvisGraphBg = { create, readMode, MODES, MODE_LABEL, STORAGE_KEY };
 })();
