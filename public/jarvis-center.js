@@ -1,5 +1,5 @@
 'use strict';
-// The 2D Javis reactor.
+// The 2D Jarvis reactor.
 // Same five pictures: sonar while ready, a sweep while wake, bars while
 // listening, the neural mesh while thinking or speaking. No microphone samples
 // here — the public pages use the browser's speech recogniser — so the rings

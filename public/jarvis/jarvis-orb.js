@@ -1,19 +1,19 @@
 'use strict';
-// javis-orb.js — the tuned fbm energy field behind Javis's reactor, and the raw-WebGL
+// jarvis-orb.js — the tuned fbm energy field behind Jarvis's reactor, and the raw-WebGL
 // fallback renderer for machines that cannot run the 3D one.
 //
 // WHAT THIS FILE WAS, AND WHAT IT BECAME
 // This used to be the primary THINKING/SPEAKING backdrop, on its own canvas,
 // crossfaded against the 2D reactor by CSS. That is no longer the whole story:
-// javis-reactor3d.js now draws all five states as a real 3D sphere on THIS SAME
+// jarvis-reactor3d.js now draws all five states as a real 3D sphere on THIS SAME
 // CANVAS, and it renders this file's shader — unchanged, via the exported `FRAG` and
 // `VERT` below — as its own backdrop. So this file has two jobs now, not one:
 //   1. owner of the tuned GLSL both renderers share
-//   2. the tier-2 fallback: createOrb() + javis.js's full 2D drawOrb() is exactly
+//   2. the tier-2 fallback: createOrb() + jarvis.js's full 2D drawOrb() is exactly
 //      what ran here before the 3D reactor existed, and it is what still runs on a
 //      machine without WebGL2, without import maps, or on a software rasteriser.
-// See startReactor() in javis.js for the three-tier selection, and
-// javis-reactor3d.js's header for why it takes over this canvas rather than adding
+// See startReactor() in jarvis.js for the three-tier selection, and
+// jarvis-reactor3d.js's header for why it takes over this canvas rather than adding
 // one — the two-context ceiling this file's context-loss note (below) already argues
 // for the same reason.
 //
@@ -47,7 +47,7 @@
   //   uState  0 = thinking, 1 = speaking. Held as a float and LERPED by the JS
   //           side rather than switched, so a state change is a visible morph
   //           rather than a jump cut.
-  //   uAmp    0..1. In `speaking` this is the REAL reply audio (see javis.js's
+  //   uAmp    0..1. In `speaking` this is the REAL reply audio (see jarvis.js's
   //           player analyser), which is the whole point — the orb has to move
   //           with the words, not on a timer.
   const FRAG = `#version 300 es
@@ -59,8 +59,8 @@
   // is discrete, and a fragment shader is a poor tool for discrete things. What this
   // layer adds is the energy field the mesh floats in: soft, dim, and deliberately
   // low-contrast so it never competes with what is drawn over it.
-  // Where that subject lives depends on the tier: javis-reactor3d.js's 3D sphere in
-  // this SAME scene (tier 1, the common case), or javis.js's 2D drawGraph on the
+  // Where that subject lives depends on the tier: jarvis-reactor3d.js's 3D sphere in
+  // this SAME scene (tier 1, the common case), or jarvis.js's 2D drawGraph on the
   // canvas above this one (tier 2, the fallback). Either way this shader does not
   // know or care which — it only ever reads uTime/uAmp/uState/uBackdrop.
   uniform float uTime;
@@ -68,7 +68,7 @@
   uniform float uState;     // 0 thinking .. 1 speaking (lerped, never switched)
   uniform vec2  uRes;
   // How present the field is at all. This used to be a CSS opacity on #orb-gl, which
-  // worked while the field had a canvas to itself. javis-reactor3d.js renders this same
+  // worked while the field had a canvas to itself. jarvis-reactor3d.js renders this same
   // source INTO the canvas that also carries the subject, where CSS can no longer fade
   // one without the other — so the fade became a uniform.
   //
@@ -169,7 +169,7 @@
   // caller keeps its 2D orb and the user sees a slightly plainer animation
   // rather than a broken panel.
   // `opts.gl` lets the caller hand over a context it already made, which is how the
-  // page keeps its context count flat. javis.js creates exactly one on #orb-gl and
+  // page keeps its context count flat. jarvis.js creates exactly one on #orb-gl and
   // gives it to whichever renderer wins — the 3D reactor, or this. Calling getContext
   // here as well would make a second one on a canvas that already has one (a no-op at
   // best, a differently-configured context at worst), and asking each module to make
@@ -210,7 +210,7 @@
     } catch (err) {
       // Compile/link failures are the one case worth a console line: they mean
       // a real bug in the GLSL above, not an unsupported browser.
-      if (typeof console !== 'undefined') console.warn('[javis-orb]', err.message);
+      if (typeof console !== 'undefined') console.warn('[jarvis-orb]', err.message);
       return dead;
     }
 
@@ -227,7 +227,7 @@
     // Targets vs current: both the state morph and the amplitude are eased
     // toward their target every frame. Amplitude in particular arrives as a
     // spiky RMS reading, and an unsmoothed orb reads as flicker rather than
-    // speech — the same reasoning as sampleLevel()'s smoothing in javis.js.
+    // speech — the same reasoning as sampleLevel()'s smoothing in jarvis.js.
     let stateTarget = 0, stateNow = 0;
     let ampTarget = 0, ampNow = 0;
 
@@ -239,8 +239,8 @@
     // process restart takes them both out at once.
     //
     // This paragraph is now load-bearing for a second reason: it is WHY
-    // javis-reactor3d.js takes over this same canvas instead of asking for a third
-    // context of its own, and why javis.js creates exactly one context on #orb-gl and
+    // jarvis-reactor3d.js takes over this same canvas instead of asking for a third
+    // context of its own, and why jarvis.js creates exactly one context on #orb-gl and
     // hands it down rather than letting each renderer probe for support on its own
     // scratch canvas. A third context, even a transient one, is the exact condition
     // that gets one of the two real ones evicted.
@@ -248,7 +248,7 @@
     const onLost = (e) => {
       e?.preventDefault?.();   // without this the context can never be restored
       lost = true;
-      if (typeof console !== 'undefined') console.warn('[javis-orb] WebGL context lost');
+      if (typeof console !== 'undefined') console.warn('[jarvis-orb] WebGL context lost');
     };
     canvas.addEventListener?.('webglcontextlost', onLost, false);
 
@@ -277,7 +277,7 @@
         gl.clear(gl.COLOR_BUFFER_BIT);
         gl.useProgram(prog);
         gl.uniform1f(uTime, t);
-        // Always 1 here. This path only ever draws when javis.js has already decided the
+        // Always 1 here. This path only ever draws when jarvis.js has already decided the
         // field should be visible — the crossfade is still CSS's job on #orb-gl — but the
         // uniform has to be written or it reads 0 and the field never appears at all.
         gl.uniform1f(uBackdrop, 1);
@@ -299,12 +299,12 @@
     };
   }
 
-  // FRAG is exported because javis-reactor3d.js renders THIS SHADER, unchanged, as
+  // FRAG is exported because jarvis-reactor3d.js renders THIS SHADER, unchanged, as
   // the backdrop of its 3D scene. Sharing the source rather than copying it is the
   // point: the field's look is tuned, and two copies would drift the moment either
   // was touched. The 3D reactor supplies its own full-screen quad and its own
   // uniform plumbing, so nothing above needs to know it has a second consumer.
   const api = { createOrb, STATE_MIX, FRAG, VERT };
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
-  if (typeof window !== 'undefined') window.SangaiJavisOrb = api;
+  if (typeof window !== 'undefined') window.SangaiJarvisOrb = api;
 })();

@@ -1,13 +1,13 @@
 {
-  "name": "sangai-javis",
+  "name": "sangai-jarvis",
   "version": "0.1.0",
   "description": "Browser-only on-device voice and model assistant",
   "author": "Sang <sang@sangai.today>",
-  "homepage": "https://github.com/sangaitoday/sangai-javis#readme",
+  "homepage": "https://github.com/sangaitoday/sangai-jarvis#readme",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/sangaitoday/sangai-javis.git"
+    "url": "https://github.com/sangaitoday/sangai-jarvis.git"
   },
   "scripts": {
     "test": "node --test test/*.test.js",

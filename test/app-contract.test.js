@@ -107,7 +107,7 @@ test('README and LICENSE include setup instructions, SangAI info, contact email,
   assert.match(readme, /WebGPU/);
   assert.match(readme, /sang@sangai\.today/);
   assert.match(readme, /SangAI/);
-  assert.match(readme, /\[Open the live SangAI Javis demo\]\(https:\/\/www\.sangai\.today\/\)/);
+  assert.match(readme, /\[Open the live SangAI Jarvis demo\]\(https:\/\/www\.sangai\.today\/\)/);
 
   assert.match(license, /sang@sangai\.today/);
   assert.match(license, /SangAI/);

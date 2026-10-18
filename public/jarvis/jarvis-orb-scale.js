@@ -1,10 +1,10 @@
 'use strict';
-// javis-orb-scale.js — how big the 3D orb may be on this device. Pure arithmetic: every
+// jarvis-orb-scale.js — how big the 3D orb may be on this device. Pure arithmetic: every
 // input (CSS size, devicePixelRatio, GL limits, navigator hints, frame times, the
 // clock) is passed in, so node:test covers it whole and every surface that mounts the
 // orb shares one copy.
 //
-// Two budgets. The NODE MULTIPLIER is how many times javis-lattice.js's ~830 nodes the
+// Two budgets. The NODE MULTIPLIER is how many times jarvis-lattice.js's ~830 nodes the
 // sphere is built with (1, 2, 5 or 10). The RENDER SCALE is how many times the device
 // pixels the orb's canvas is backed at (1..10), so it stays sharp under zoom. Both
 // start from what the device can afford and are walked down by the governor when frames
@@ -19,7 +19,7 @@
   const SCALE_COOLDOWN_MS = 2000, SCALE_UP_DWELL_MS = 3000;
   const NODE_SLOW_DWELL_MS = 5000, NODE_COOLDOWN_MS = 10000;
 
-  // Gains on javis-reactor3d.js's own look, per multiplier, tuned by screenshot. A denser
+  // Gains on jarvis-reactor3d.js's own look, per multiplier, tuned by screenshot. A denser
   // sphere gets smaller nodes or its additive glow runs together into a white ball.
   const LOOK = {
     1: { nodeSize: 2.0, nodeLit: 1.3, edgeAlpha: 1.6 },
@@ -110,5 +110,5 @@
   };
 
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
-  if (typeof window !== 'undefined') window.SangaiJavisOrbScale = api;
+  if (typeof window !== 'undefined') window.SangaiJarvisOrbScale = api;
 })();

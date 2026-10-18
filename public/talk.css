@@ -1,4 +1,4 @@
-/* Center Javis on the open floor. The shell has no plate. The transcript
+/* Center Jarvis on the open floor. The shell has no plate. The transcript
    is a bare column at the bottom left. */
 
 #talk {
@@ -38,7 +38,7 @@
   height: 100%;
 }
 
-/* The logo sits under the Javis orb and over the graph (#stage): an opaque disc, so the
+/* The logo sits under the Jarvis orb and over the graph (#stage): an opaque disc, so the
    graph never shows through, with the photo at 30% on it. Spins with the orb. */
 .talk-logo {
   position: absolute;
